@@ -2,14 +2,20 @@ import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 
 const NumericButton = ({ children }) => (
-  <TouchableOpacity onPress={() => {}}>
-    <Text style={styles}>{children}</Text>
+  <TouchableOpacity style={styles.touchable} onPress={() => {}}>
+    <Text style={styles.text}>{children}</Text>
   </TouchableOpacity>
 )
 
 const styles = {
-  fontSize: 40,
-  fontWeight: 'bold'
+  text: {
+    fontSize: 40,
+    textAlign: 'center',
+    fontFamily: 'RubikMonoOne'
+  },
+  touchable: {
+    flex: 1
+  }
 }
 
 export default NumericButton
