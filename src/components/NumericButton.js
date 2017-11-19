@@ -9,9 +9,9 @@ const NumericButton = ({ children }) => (
 
 const styles = {
   text: {
-    fontSize: 40,
+    fontSize: 50,
     textAlign: 'center',
-    fontFamily: 'RubikMonoOne'
+    fontFamily: 'VollkornSC-Bold'
   },
   touchable: {
     flex: 1
