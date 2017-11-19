@@ -8,7 +8,7 @@ import reducer from './reducers'
 
 import GameContainer from './containers/GameContainer'
 
-export default class App extends React.Component {
+export default class Main extends React.Component {
   state = {
     fontLoaded: false
   }
@@ -34,4 +34,4 @@ export default class App extends React.Component {
   }
 }
 
-Expo.registerRootComponent(App)
+Expo.registerRootComponent(Main)
