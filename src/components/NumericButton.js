@@ -17,15 +17,16 @@ export default class NumericButton extends React.Component {
   }
 
   animate() {
-    Animated.timing(this.state.fontZoom, {
-      toValue: this.styles.text.fontSize / 1.5,
-      duration: 50
-    }).start(() => {
+    Animated.sequence([
+      Animated.timing(this.state.fontZoom, {
+        toValue: this.styles.text.fontSize / 1.5,
+        duration: 50
+      }),
       Animated.timing(this.state.fontZoom, {
         toValue: this.styles.text.fontSize,
         duration: 500
-      }).start()
-    })
+      })
+    ]).start()
   }
 
   render() {
