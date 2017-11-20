@@ -10,8 +10,7 @@ export default class NumericButton extends React.Component {
       fontFamily: 'VollkornSC-Bold',
       flex: 1,
       alignSelf: 'baseline'
-    },
-    touchable: {}
+    }
   }
   state = {
     fontZoom: new Animated.Value(this.styles.text.fontSize)
@@ -34,8 +33,10 @@ export default class NumericButton extends React.Component {
 
     return (
       <TouchableWithoutFeedback
-        style={this.styles.touchable}
-        onPress={() => this.animate()}
+        onPress={() => {
+          this.animate()
+          this.props.onPress()
+        }}
       >
         <Animated.Text style={{ ...this.styles.text, fontSize: fontZoom }}>
           {this.props.children}
