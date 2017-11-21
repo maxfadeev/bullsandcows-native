@@ -12,20 +12,19 @@ const NumericButtonsList = ({
   <FlatList
     style={styles}
     numColumns={5}
-    data={numerals.map(n => ({ key: n }))}
+    data={numerals.map((n, i) => ({ key: i, numeral: n }))}
     renderItem={({ item }) => (
       <NumericButton
-        onPress={() => onNumericButtonPress(item.key, typedDigits, turn)}
+        onPress={() => onNumericButtonPress(item.numeral, typedDigits, turn)}
       >
-        {item.key}
+        {item.numeral}
       </NumericButton>
     )}
   />
 )
 
 const styles = {
-  marginLeft: 40,
-  marginRight: 40
+  width: 250
 }
 
 export default NumericButtonsList

@@ -23,6 +23,8 @@ const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
         return [...state, action.numeral]
       }
       return state
+    default:
+      return state
   }
 }
 

@@ -25,3 +25,11 @@ export const pressNumericButton = (numeral, typedDigits, turn) => {
     isDigitAvailable
   }
 }
+
+export const removeTypedDigit = (numeral, key) => {
+  return {
+    type: REMOVE_TYPED_DIGIT,
+    numeral,
+    key
+  }
+}
