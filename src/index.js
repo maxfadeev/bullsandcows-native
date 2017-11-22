@@ -15,7 +15,6 @@ export default class Main extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      RubikMonoOne: require('./assets/fonts/RubikMonoOne.ttf'),
       'VollkornSC-Bold': require('./assets/fonts/VollkornSC-Bold.ttf')
     })
 
