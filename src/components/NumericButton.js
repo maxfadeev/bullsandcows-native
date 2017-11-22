@@ -1,6 +1,10 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Text, StyleSheet } from 'react-native'
-import { Animated } from 'react-native'
+import {
+  TouchableWithoutFeedback,
+  Text,
+  StyleSheet,
+  Animated
+} from 'react-native'
 
 export default class NumericButton extends React.Component {
   constructor(props) {
