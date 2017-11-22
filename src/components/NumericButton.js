@@ -1,29 +1,23 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Text } from 'react-native'
+import { TouchableWithoutFeedback, Text, StyleSheet } from 'react-native'
 import { Animated } from 'react-native'
 
 export default class NumericButton extends React.Component {
-  styles = {
-    text: {
-      fontSize: 50,
-      textAlign: 'center',
-      fontFamily: 'VollkornSC-Bold',
-      flex: 1,
-      alignSelf: 'baseline'
+  constructor(props) {
+    super(props)
+    this.state = {
+      fontZoom: new Animated.Value(fontSize)
     }
-  }
-  state = {
-    fontZoom: new Animated.Value(this.styles.text.fontSize)
   }
 
   animate() {
     Animated.sequence([
       Animated.timing(this.state.fontZoom, {
-        toValue: this.styles.text.fontSize / 1.5,
+        toValue: fontSize / 1.5,
         duration: 50
       }),
       Animated.timing(this.state.fontZoom, {
-        toValue: this.styles.text.fontSize,
+        toValue: fontSize,
         duration: 500
       })
     ]).start()
@@ -39,10 +33,24 @@ export default class NumericButton extends React.Component {
           this.props.onPress()
         }}
       >
-        <Animated.Text style={{ ...this.styles.text, fontSize: fontZoom }}>
+        <Animated.Text
+          style={StyleSheet.flatten([styles.text, { fontSize: fontZoom }])}
+        >
           {this.props.children}
         </Animated.Text>
       </TouchableWithoutFeedback>
     )
   }
 }
+
+const fontSize = 50
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize,
+    textAlign: 'center',
+    fontFamily: 'VollkornSC-Bold',
+    flex: 1,
+    alignSelf: 'baseline'
+  }
+})

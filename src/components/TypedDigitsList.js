@@ -1,11 +1,11 @@
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, View, StyleSheet } from 'react-native'
 
 import TypedDigit from './TypedDigit'
 
 const TypedDigitsList = ({ typedDigits, onRemoveTypedDigit }) => (
   <FlatList
-    style={styles}
+    style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
@@ -16,8 +16,10 @@ const TypedDigitsList = ({ typedDigits, onRemoveTypedDigit }) => (
   />
 )
 
-const styles = {
-  width: 150
-}
+const styles = StyleSheet.create({
+  flatList: {
+    width: 150
+  }
+})
 
 export default TypedDigitsList

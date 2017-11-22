@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 
 import NumericButton from './NumericButton'
 
@@ -10,7 +10,7 @@ const NumericButtonsList = ({
   onNumericButtonPress
 }) => (
   <FlatList
-    style={styles}
+    style={styles.flatList}
     numColumns={5}
     data={numerals.map((n, i) => ({ key: i, numeral: n }))}
     renderItem={({ item }) => (
@@ -23,8 +23,10 @@ const NumericButtonsList = ({
   />
 )
 
-const styles = {
-  width: 250
-}
+const styles = StyleSheet.create({
+  flatList: {
+    width: 250
+  }
+})
 
 export default NumericButtonsList
