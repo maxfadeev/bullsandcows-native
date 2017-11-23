@@ -9,7 +9,7 @@ const TypedDigitsList = ({ typedDigits, onRemoveTypedDigit }) => (
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
-      <TypedDigit onPress={() => onRemoveTypedDigit(item.digit, typedDigits)}>
+      <TypedDigit onPress={() => onRemoveTypedDigit(item.digit, item.key)}>
         {item.digit}
       </TypedDigit>
     )}

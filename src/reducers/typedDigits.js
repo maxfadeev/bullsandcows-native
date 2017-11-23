@@ -42,6 +42,13 @@ const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
         })
       }
       return state
+    case REMOVE_TYPED_DIGIT:
+      return state.map((numeral, key) => {
+        if (key === action.key) {
+          return SUB
+        }
+        return numeral
+      })
     default:
       return state
   }
