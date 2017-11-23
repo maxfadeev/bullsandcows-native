@@ -3,20 +3,13 @@ import { FlatList, StyleSheet } from 'react-native'
 
 import NumericButton from './NumericButton'
 
-const NumericButtonsList = ({
-  numerals,
-  typedDigits,
-  turn,
-  onNumericButtonPress
-}) => (
+const NumericButtonsList = ({ numerals, turn, onNumericButtonPress }) => (
   <FlatList
     style={styles.flatList}
     numColumns={5}
     data={numerals.map((n, i) => ({ key: i, numeral: n }))}
     renderItem={({ item }) => (
-      <NumericButton
-        onPress={() => onNumericButtonPress(item.numeral, typedDigits, turn)}
-      >
+      <NumericButton onPress={() => onNumericButtonPress(item.numeral, turn)}>
         {item.numeral}
       </NumericButton>
     )}

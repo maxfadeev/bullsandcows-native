@@ -4,23 +4,42 @@ import {
   ADD_GUESS,
   ADD_SCORE
 } from '../constants/ActionTypes'
-import { SUB, GUESS_LENGTH, SCORE_LENGTH } from '../constants/Game'
+import {
+  GUESS_TURN,
+  SCORE_TURN,
+  GUESS_LENGTH,
+  SCORE_LENGTH,
+  SUB
+} from '../constants/Game'
+
+function isNumeralAllowable(state, numeral, turn) {
+  return !(
+    (turn === GUESS_TURN &&
+      ((state[0] === SUB && numeral === 0) ||
+        state.includes(numeral) ||
+        !state.includes(SUB))) ||
+    (turn === SCORE_TURN &&
+      (numeral > GUESS_LENGTH ||
+        (state.includes(SUB) &&
+          state.reduce((a, b) => (b !== SUB ? a + b : a), 0) + numeral >
+            GUESS_LENGTH) ||
+        !state.includes(SUB) ||
+        state.reduce((a, b) => a + b, 0) + numeral > GUESS_LENGTH))
+  )
+}
 
 const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
   switch (action.type) {
     case PRESS_NUMERIC_BUTTON:
-      if (action.isDigitAvailable) {
-        if (state.includes(SUB)) {
-          let isEnought = false
-          return state.map(numeral => {
-            if (numeral === SUB && !isEnought) {
-              isEnought = true
-              return action.numeral
-            }
-            return numeral
-          })
-        }
-        return [...state, action.numeral]
+      if (isNumeralAllowable(state, action.numeral, action.turn)) {
+        let isEnought = false
+        return state.map(numeral => {
+          if (!isEnought && numeral === SUB) {
+            isEnought = true
+            return action.numeral
+          }
+          return numeral
+        })
       }
       return state
     default:
