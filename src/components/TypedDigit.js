@@ -1,6 +1,5 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Text, StyleSheet } from 'react-native'
-import { Animated } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native'
 
 export default class TypedDigit extends React.Component {
   animate() {}
@@ -11,14 +10,15 @@ export default class TypedDigit extends React.Component {
 
   render() {
     return (
-      <TouchableWithoutFeedback
+      <TouchableOpacity
+        style={{ flex: 1 }}
         onPress={() => {
           this.animate()
           this.props.onPress()
         }}
       >
         <Animated.Text style={styles.text}>{this.props.children}</Animated.Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     )
   }
 }

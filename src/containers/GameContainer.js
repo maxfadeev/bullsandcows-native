@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { View } from 'react-native'
 
 import NumericButtonsListContainer from './NumericButtonsListContainer'
 import TypedDigitsListContainer from './TypedDigitsListContainer'
-import { View } from 'react-native'
 
 const GameContainer = () => (
   <View style={{ flex: 1, alignItems: 'center' }}>
