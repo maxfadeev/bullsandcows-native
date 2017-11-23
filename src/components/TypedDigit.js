@@ -25,7 +25,7 @@ export default class TypedDigit extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 35,
+    fontSize: 30,
     textAlign: 'center',
     fontFamily: 'VollkornSC-Regular',
     flex: 1
