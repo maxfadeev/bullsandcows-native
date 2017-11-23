@@ -15,7 +15,8 @@ export default class Main extends React.Component {
 
   async componentDidMount() {
     await Font.loadAsync({
-      'VollkornSC-Bold': require('./assets/fonts/VollkornSC-Bold.ttf')
+      'VollkornSC-Bold': require('./assets/fonts/VollkornSC-Bold.ttf'),
+      'VollkornSC-Regular': require('./assets/fonts/VollkornSC-Regular.ttf')
     })
 
     this.setState({ fontLoaded: true })

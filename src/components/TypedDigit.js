@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 35,
     textAlign: 'center',
-    fontFamily: 'VollkornSC-Bold',
+    fontFamily: 'VollkornSC-Regular',
     flex: 1
   }
 })
