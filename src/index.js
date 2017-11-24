@@ -6,7 +6,7 @@ import { View } from 'react-native'
 
 import reducer from './reducers'
 
-import GameContainer from './containers/GameContainer'
+import Game from './components/Game'
 
 export default class Main extends React.Component {
   state = {
@@ -27,7 +27,7 @@ export default class Main extends React.Component {
       <View style={{ flex: 1 }}>
         {this.state.fontLoaded ? (
           <Provider store={createStore(reducer)}>
-            <GameContainer />
+            <Game />
           </Provider>
         ) : null}
       </View>

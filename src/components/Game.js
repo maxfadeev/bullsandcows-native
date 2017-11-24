@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { View } from 'react-native'
 
-import NumericButtonsListContainer from './NumericButtonsListContainer'
-import TypedDigitsListContainer from './TypedDigitsListContainer'
+import NumericButtonsListContainer from '../containers/NumericButtonsListContainer'
+import TypedDigitsListContainer from '../containers/TypedDigitsListContainer'
 
-const GameContainer = () => (
+const Game = () => (
   <View style={{ flex: 1, alignItems: 'center' }}>
     <View style={{ flex: 6 }} />
     <View style={{ flex: 1 }}>
@@ -17,4 +17,4 @@ const GameContainer = () => (
   </View>
 )
 
-export default connect()(GameContainer)
+export default Game
