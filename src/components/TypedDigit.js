@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native'
+import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 export default class TypedDigit extends React.Component {
   animate() {}
@@ -17,7 +17,7 @@ export default class TypedDigit extends React.Component {
           this.props.onPress()
         }}
       >
-        <Animated.Text style={styles.text}>{this.props.children}</Animated.Text>
+        <Text style={styles.text}>{this.props.children}</Text>
       </TouchableOpacity>
     )
   }
