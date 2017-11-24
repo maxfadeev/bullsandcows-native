@@ -2,8 +2,6 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 export default class TypedDigit extends React.Component {
-  animate() {}
-
   shouldComponentUpdate(nextProps) {
     return nextProps.children !== this.props.children
   }
@@ -13,7 +11,6 @@ export default class TypedDigit extends React.Component {
       <TouchableOpacity
         style={{ flex: 1 }}
         onPress={() => {
-          this.animate()
           this.props.onPress()
         }}
       >
