@@ -15,7 +15,7 @@ const mapStateToProps = ({ typedDigits }) => {
   }
 }
 
-const TypedDigitsContainer = ({ typedDigits, onDiscardDigit, dispatch }) => {
+const TypedDigitsContainer = ({ typedDigits, dispatch }) => {
   if (!typedDigits.includes(SUB)) {
     dispatch(hideNumericButtons())
   }
