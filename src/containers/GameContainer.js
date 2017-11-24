@@ -7,7 +7,7 @@ import TypedDigitsListContainer from './TypedDigitsListContainer'
 
 const GameContainer = () => (
   <View style={{ flex: 1, alignItems: 'center' }}>
-    <View style={{ flex: 5 }} />
+    <View style={{ flex: 6 }} />
     <View style={{ flex: 1 }}>
       <TypedDigitsListContainer />
     </View>
