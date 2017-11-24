@@ -7,7 +7,7 @@ import {
   hideNumericButtons,
   showNumericButtons
 } from '../actions/numerals'
-import { GUESS_LENGTH, SUB } from '../constants/Game'
+import { SUB } from '../constants/Game'
 
 const mapStateToProps = ({ typedDigits }) => {
   return {
