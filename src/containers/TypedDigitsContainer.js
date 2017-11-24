@@ -15,11 +15,7 @@ const mapStateToProps = ({ typedDigits }) => {
   }
 }
 
-const TypedDigitsListContainer = ({
-  typedDigits,
-  onDiscardDigit,
-  dispatch
-}) => {
+const TypedDigitsContainer = ({ typedDigits, onDiscardDigit, dispatch }) => {
   if (!typedDigits.includes(SUB)) {
     dispatch(hideNumericButtons())
   }
@@ -36,4 +32,4 @@ const TypedDigitsListContainer = ({
   )
 }
 
-export default connect(mapStateToProps)(TypedDigitsListContainer)
+export default connect(mapStateToProps)(TypedDigitsContainer)
