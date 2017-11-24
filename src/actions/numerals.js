@@ -1,7 +1,7 @@
 import {
   PRESS_NUMERIC_BUTTON,
   REMOVE_TYPED_DIGIT,
-  HIDE_NUMERIC_BUTTONS,
+  TOGGLE_NUMERIC_BUTTONS_VISIBILITY,
   SHOW_NUMERIC_BUTTONS
 } from '../constants/ActionTypes'
 
@@ -21,14 +21,8 @@ export const discardDigit = (numeral, key) => {
   }
 }
 
-export const hideNumericButtons = () => {
+export const toggleNumericButtonsVisibility = () => {
   return {
-    type: HIDE_NUMERIC_BUTTONS
-  }
-}
-
-export const showNumericButtons = () => {
-  return {
-    type: SHOW_NUMERIC_BUTTONS
+    type: TOGGLE_NUMERIC_BUTTONS_VISIBILITY
   }
 }
