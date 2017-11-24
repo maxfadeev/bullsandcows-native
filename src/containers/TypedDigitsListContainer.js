@@ -1,8 +1,13 @@
+import React from 'react'
 import { connect } from 'react-redux'
 
 import TypedDigitsList from '../components/TypedDigitsList'
-import { discardDigit } from '../actions/numerals'
-import { SCORE_TURN } from '../constants/Game'
+import {
+  discardDigit,
+  hideNumericButtons,
+  showNumericButtons
+} from '../actions/numerals'
+import { GUESS_LENGTH, SUB } from '../constants/Game'
 
 const mapStateToProps = ({ typedDigits }) => {
   return {
@@ -10,12 +15,25 @@ const mapStateToProps = ({ typedDigits }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onDiscardDigit: (numeral, key) => {
-      dispatch(discardDigit(numeral, key))
-    }
+const TypedDigitsListContainer = ({
+  typedDigits,
+  onDiscardDigit,
+  dispatch
+}) => {
+  if (!typedDigits.includes(SUB)) {
+    dispatch(hideNumericButtons())
   }
+  return (
+    <TypedDigitsList
+      typedDigits={typedDigits}
+      onDiscardDigit={(numeral, key) => {
+        if (!typedDigits.includes(SUB)) {
+          dispatch(showNumericButtons())
+        }
+        dispatch(discardDigit(numeral, key))
+      }}
+    />
+  )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypedDigitsList)
+export default connect(mapStateToProps)(TypedDigitsListContainer)
