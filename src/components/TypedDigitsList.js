@@ -3,13 +3,13 @@ import { FlatList, View, StyleSheet } from 'react-native'
 
 import TypedDigit from './TypedDigit'
 
-const TypedDigitsList = ({ typedDigits, onRemoveTypedDigit }) => (
+const TypedDigitsList = ({ typedDigits, onDiscardDigit }) => (
   <FlatList
     style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
-      <TypedDigit onPress={() => onRemoveTypedDigit(item.digit, item.key)}>
+      <TypedDigit onPress={() => onDiscardDigit(item.digit, item.key)}>
         {item.digit}
       </TypedDigit>
     )}

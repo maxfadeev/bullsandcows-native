@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import TypedDigitsList from '../components/TypedDigitsList'
-import { removeTypedDigit } from '../actions/numerals'
+import { discardDigit } from '../actions/numerals'
 import { SCORE_TURN } from '../constants/Game'
 
 const mapStateToProps = ({ typedDigits }) => {
@@ -12,8 +12,8 @@ const mapStateToProps = ({ typedDigits }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRemoveTypedDigit: (numeral, key) => {
-      dispatch(removeTypedDigit(numeral, key))
+    onDiscardDigit: (numeral, key) => {
+      dispatch(discardDigit(numeral, key))
     }
   }
 }

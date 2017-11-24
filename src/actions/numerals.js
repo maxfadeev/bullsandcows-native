@@ -11,7 +11,7 @@ export const pressNumericButton = (numeral, turn) => {
   }
 }
 
-export const removeTypedDigit = (numeral, key) => {
+export const discardDigit = (numeral, key) => {
   return {
     type: REMOVE_TYPED_DIGIT,
     numeral,
