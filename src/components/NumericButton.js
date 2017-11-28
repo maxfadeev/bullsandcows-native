@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  TouchableWithoutFeedback,
-  Text,
-  StyleSheet,
-  Animated
-} from 'react-native'
+import { TouchableWithoutFeedback, StyleSheet, Animated } from 'react-native'
 
 export default class NumericButton extends React.Component {
   constructor(props) {
@@ -15,14 +10,16 @@ export default class NumericButton extends React.Component {
   }
 
   animate() {
-    Animated.sequence([
-      Animated.timing(this.state.fontZoom, {
+    Animated.stagger(270, [
+      Animated.spring(this.state.fontZoom, {
         toValue: fontSize / 1.5,
-        duration: 50
+        speed: 20,
+        bounciness: 0
       }),
-      Animated.timing(this.state.fontZoom, {
+      Animated.spring(this.state.fontZoom, {
         toValue: fontSize,
-        duration: 500
+        speed: 20,
+        bounciness: 0
       })
     ]).start()
   }
