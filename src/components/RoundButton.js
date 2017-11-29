@@ -85,9 +85,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#212121',
     textAlignVertical: 'center',
-    fontFamily: 'VollkornSC-Regular',
-    fontSize: 12,
-    fontWeight: 'bold'
+    fontFamily: 'VollkornSC-Bold',
+    fontSize: 16
   },
   textView: {
     position: 'absolute',
