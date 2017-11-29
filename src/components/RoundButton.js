@@ -81,27 +81,33 @@ const styles = StyleSheet.create({
     height: 110
   },
   text: {
-    width: 100,
-    height: 100,
-    backgroundColor: '#212121',
     color: '#efefef',
-    borderRadius: 100,
     textAlign: 'center',
+    backgroundColor: '#212121',
     textAlignVertical: 'center',
     fontFamily: 'VollkornSC-Regular',
-    fontSize: 19,
+    fontSize: 12,
     fontWeight: 'bold'
   },
   textView: {
     position: 'absolute',
+    top: 0,
     bottom: 0,
     left: 0,
     right: 0,
-    top: 0
+    width: 100,
+    height: 100,
+    backgroundColor: '#212121',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   shadow: {
     position: 'absolute',
     top: 4,
+    bottom: 0,
+    left: 0,
+    right: 0,
     width: 100,
     height: 100,
     backgroundColor: '#5c5c5c',
@@ -109,9 +115,12 @@ const styles = StyleSheet.create({
   },
   view: {
     position: 'absolute',
+    top: 0,
     bottom: 0,
     left: 0,
     right: 0,
+    height: 110,
+    justifyContent: 'center',
     alignItems: 'center'
   }
 })
