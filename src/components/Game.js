@@ -4,6 +4,7 @@ import { View } from 'react-native'
 
 import NumericButtonsContainer from '../containers/NumericButtonsContainer'
 import TypedDigitsContainer from '../containers/TypedDigitsContainer'
+import RoundButtonContainer from '../containers/RoundButtonContainer'
 
 const Game = () => (
   <View style={{ flex: 1, alignItems: 'center' }}>
@@ -13,6 +14,7 @@ const Game = () => (
     </View>
     <View style={{ flex: 3 }}>
       <NumericButtonsContainer numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} />
+      <RoundButtonContainer />
     </View>
   </View>
 )
