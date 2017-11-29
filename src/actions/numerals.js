@@ -28,7 +28,7 @@ export const toggleNumericButtonsVisibility = () => {
   }
 }
 
-export const pressRoundButton = () => {
+export const pressRoundButton = (turn, typedDigits) => {
   return {
     type: PRESS_ROUND_BUTTON
   }

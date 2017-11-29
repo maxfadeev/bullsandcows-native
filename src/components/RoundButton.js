@@ -33,6 +33,12 @@ export default class RoundButton extends React.Component {
     }
   }
 
+  shouldComponentUpdate(nextProps) {
+    return (
+      nextProps.numericButtonsVisibility !== this.props.numericButtonsVisibility
+    )
+  }
+
   animate() {
     Animated.stagger(100, [
       Animated.spring(this.state.press, {
@@ -54,6 +60,7 @@ export default class RoundButton extends React.Component {
         <TouchableWithoutFeedback
           onPress={() => {
             this.animate()
+            this.props.onRoundButtonPress(this.props.typedDigits)
           }}
         >
           <Animated.View style={styles.container}>

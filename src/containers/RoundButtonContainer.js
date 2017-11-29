@@ -3,16 +3,18 @@ import { connect } from 'react-redux'
 import RoundButton from '../components/RoundButton'
 import { pressRoundButton } from '../actions/numerals'
 
-const mapStateToProps = ({ numericButtonsVisibility }) => {
+const mapStateToProps = ({ turn, typedDigits, numericButtonsVisibility }) => {
   return {
+    turn,
+    typedDigits,
     numericButtonsVisibility
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRoundButtonPress: () => {
-      dispatch(pressRoundButton())
+    onRoundButtonPress: (turn, typedDigits) => {
+      dispatch(pressRoundButton(turn, typedDigits))
     }
   }
 }
