@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
     fontFamily: 'VollkornSC-Regular',
-    fontSize: 15,
+    fontSize: 19,
     fontWeight: 'bold'
   },
   textView: {
