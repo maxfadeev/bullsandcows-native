@@ -3,14 +3,17 @@ import { connect } from 'react-redux'
 import NumericButtonsList from '../components/NumericButtonsList'
 import { pressNumericButton } from '../actions/numerals'
 
-const mapStateToProps = state => {
-  return {}
+const mapStateToProps = ({ turn, numericButtonsVisibility }) => {
+  return {
+    turn,
+    numericButtonsVisibility
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onNumericButtonPress: numeral => {
-      dispatch(pressNumericButton(numeral))
+    onNumericButtonPress: (numeral, turn) => {
+      dispatch(pressNumericButton(numeral, turn))
     }
   }
 }
