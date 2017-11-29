@@ -29,7 +29,7 @@ export default class RoundButton extends React.Component {
     if (nextProps.numericButtonsVisibility === true) {
       this.setState({ top: 200 })
     } else {
-      this.setState({ top: 15 })
+      this.setState({ top: 30 })
     }
   }
 
