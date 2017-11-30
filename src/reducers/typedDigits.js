@@ -7,7 +7,7 @@ import {
 import {
   GUESS_TURN,
   SCORE_TURN,
-  GUESS_LENGTH,
+  SECRET_LENGTH,
   SCORE_LENGTH,
   SUB
 } from '../constants/Game'
@@ -19,16 +19,16 @@ function isNumeralAllowable(state, numeral, turn) {
         state.includes(numeral) ||
         !state.includes(SUB))) ||
     (turn === SCORE_TURN &&
-      (numeral > GUESS_LENGTH ||
+      (numeral > SECRET_LENGTH ||
         (state.includes(SUB) &&
           state.reduce((a, b) => (b !== SUB ? a + b : a), 0) + numeral >
-            GUESS_LENGTH) ||
+            SECRET_LENGTH) ||
         !state.includes(SUB) ||
-        state.reduce((a, b) => a + b, 0) + numeral > GUESS_LENGTH))
+        state.reduce((a, b) => a + b, 0) + numeral > SECRET_LENGTH))
   )
 }
 
-const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
+const typedDigits = (state = Array(SECRET_LENGTH).fill(SUB), action) => {
   switch (action.type) {
     case PRESS_NUMERIC_BUTTON:
       if (isNumeralAllowable(state, action.numeral, action.turn)) {
