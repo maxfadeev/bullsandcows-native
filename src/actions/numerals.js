@@ -1,6 +1,6 @@
 import {
   PRESS_NUMERIC_BUTTON,
-  REMOVE_TYPED_DIGIT,
+  DISCARD_TYPED_DIGIT,
   TOGGLE_NUMERIC_BUTTONS_VISIBILITY,
   SHOW_NUMERIC_BUTTONS,
   PRESS_ROUND_BUTTON
@@ -16,7 +16,7 @@ export const pressNumericButton = (numeral, turn) => {
 
 export const discardDigit = (numeral, key) => {
   return {
-    type: REMOVE_TYPED_DIGIT,
+    type: DISCARD_TYPED_DIGIT,
     numeral,
     key
   }
