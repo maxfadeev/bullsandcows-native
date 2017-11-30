@@ -1,6 +1,6 @@
 import {
   PRESS_NUMERIC_BUTTON,
-  REMOVE_TYPED_DIGIT,
+  DISCARD_TYPED_DIGIT,
   ADD_GUESS,
   ADD_SCORE
 } from '../constants/ActionTypes'
