@@ -60,7 +60,7 @@ export default class RoundButton extends React.Component {
         <TouchableWithoutFeedback
           onPress={() => {
             this.animate()
-            this.props.onRoundButtonPress(this.props.typedDigits)
+            this.props.onRoundButtonPress()
           }}
         >
           <Animated.View style={styles.container}>
