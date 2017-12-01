@@ -3,8 +3,13 @@ import {
   DISCARD_TYPED_DIGIT,
   TOGGLE_NUMERIC_BUTTONS_VISIBILITY,
   SHOW_NUMERIC_BUTTONS,
-  PRESS_ROUND_BUTTON
+  PRESS_ROUND_BUTTON,
+  GIVE_DIGITS_TO_BOT,
+  SAVE_DIGITS,
+  FETCH_DIGITS
 } from '../constants/ActionTypes'
+
+import { calculateChoices, getGuess } from '../api/bot'
 
 export const pressNumericButton = (numeral, turn) => {
   return {
@@ -28,8 +33,35 @@ export const toggleNumericButtonsVisibility = () => {
   }
 }
 
-export const pressRoundButton = (turn, typedDigits) => {
+function fetchDigits() {
   return {
-    type: PRESS_ROUND_BUTTON
+    type: FETCH_DIGITS
+  }
+}
+
+function saveDigits(typedDigits, opponentDigits, turn) {
+  return {
+    type: SAVE_DIGITS,
+    typedDigits,
+    opponentDigits,
+    turn
+  }
+}
+
+function giveDigitsToBot(typedDigits, turn) {
+  return {
+    type: GIVE_DIGITS_TO_BOT,
+    typedDigits,
+    turn
+  }
+}
+
+export const pressRoundButton = () => {
+  return (dispatch, getState) => {
+    const { turn, typedDigits, bot } = getState()
+    const opponentDigits = bot.digits
+    Promise.resolve(dispatch(saveDigits(typedDigits, opponentDigits, turn)))
+      .then(() => dispatch(toggleNumericButtonsVisibility()))
+      .then(() => dispatch(giveDigitsToBot(typedDigits, turn)))
   }
 }
