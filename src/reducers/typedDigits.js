@@ -1,8 +1,7 @@
 import {
   PRESS_NUMERIC_BUTTON,
   DISCARD_TYPED_DIGIT,
-  ADD_GUESS,
-  ADD_SCORE
+  SAVE_DIGITS
 } from '../constants/ActionTypes'
 import {
   GUESS_TURN,
@@ -49,6 +48,13 @@ const typedDigits = (state = Array(SECRET_LENGTH).fill(SUB), action) => {
         }
         return numeral
       })
+    case SAVE_DIGITS:
+      if (action.turn === GUESS_TURN) {
+        return Array(SCORE_LENGTH).fill(SUB)
+      }
+      if (action.turn === SCORE_TURN) {
+        return Array(SECRET_LENGTH).fill(SUB)
+      }
     default:
       return state
   }
