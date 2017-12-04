@@ -31,7 +31,7 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit }) => (
 
 const styles = StyleSheet.create({
   flatList: {
-    width: 150
+    width: 128
   },
   container: {
     flex: 1,
