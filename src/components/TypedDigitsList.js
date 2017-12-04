@@ -3,15 +3,28 @@ import { FlatList, View, StyleSheet } from 'react-native'
 
 import TypedDigit from './TypedDigit'
 
-const TypedDigitsList = ({ typedDigits, onDiscardDigit }) => (
+import { SCORE_TURN } from '../constants/Game'
+
+const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit }) => (
   <FlatList
     style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
-      <TypedDigit onPress={() => onDiscardDigit(item.digit, item.key)}>
-        {item.digit}
-      </TypedDigit>
+      <View style={styles.container}>
+        <TypedDigit onPress={() => onDiscardDigit(item.digit, item.key)}>
+          {item.digit}
+        </TypedDigit>
+        <View
+          style={
+            turn === SCORE_TURN
+              ? item.key === 0
+                ? [styles.icon, styles.green]
+                : [styles.icon, styles.orange]
+              : {}
+          }
+        />
+      </View>
     )}
   />
 )
@@ -19,6 +32,23 @@ const TypedDigitsList = ({ typedDigits, onDiscardDigit }) => (
 const styles = StyleSheet.create({
   flatList: {
     width: 150
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  icon: {
+    width: 12,
+    height: 12,
+    borderRadius: 12,
+    marginTop: 10
+  },
+  green: {
+    backgroundColor: 'green'
+  },
+  orange: {
+    backgroundColor: 'orange'
   }
 })
 

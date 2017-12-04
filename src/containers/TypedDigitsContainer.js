@@ -8,9 +8,10 @@ import {
 } from '../actions/numerals'
 import { SUB } from '../constants/Game'
 
-const mapStateToProps = ({ typedDigits }) => {
+const mapStateToProps = ({ typedDigits, turn }) => {
   return {
-    typedDigits
+    typedDigits,
+    turn
   }
 }
 
@@ -23,10 +24,11 @@ class TypedDigitsContainer extends React.Component {
   }
 
   render() {
-    const { typedDigits, dispatch } = this.props
+    const { typedDigits, turn, dispatch } = this.props
     return (
       <TypedDigitsList
         typedDigits={typedDigits}
+        turn={turn}
         onDiscardDigit={(numeral, key) => {
           if (!typedDigits.includes(SUB)) {
             dispatch(toggleNumericButtonsVisibility())
