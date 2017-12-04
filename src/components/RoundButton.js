@@ -15,7 +15,8 @@ export default class RoundButton extends React.Component {
     super(props)
     this.state = {
       press: new Animated.Value(0),
-      top: 200
+      top: 200,
+      disabled: false
     }
 
     if (Platform.OS === 'android') {
@@ -40,6 +41,7 @@ export default class RoundButton extends React.Component {
   }
 
   animate() {
+    this.setState({ disabled: true })
     Animated.stagger(100, [
       Animated.spring(this.state.press, {
         toValue: 4,
@@ -51,7 +53,9 @@ export default class RoundButton extends React.Component {
         speed: 20,
         bounciness: 10
       })
-    ]).start()
+    ]).start(() => {
+      this.setState({ disabled: false })
+    })
   }
 
   render() {
@@ -59,10 +63,12 @@ export default class RoundButton extends React.Component {
       <View style={[styles.view, { top: this.state.top }]}>
         <TouchableWithoutFeedback
           onPress={() => {
-            this.animate()
-            setTimeout(() => {
-              this.props.onRoundButtonPress()
-            }, 200)
+            if (!this.state.disabled) {
+              this.animate()
+              setTimeout(() => {
+                this.props.onRoundButtonPress()
+              }, 200)
+            }
           }}
         >
           <Animated.View style={styles.container}>
