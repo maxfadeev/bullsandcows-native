@@ -60,7 +60,9 @@ export default class RoundButton extends React.Component {
         <TouchableWithoutFeedback
           onPress={() => {
             this.animate()
-            this.props.onRoundButtonPress()
+            setTimeout(() => {
+              this.props.onRoundButtonPress()
+            }, 200)
           }}
         >
           <Animated.View style={styles.container}>
