@@ -58,8 +58,12 @@ function giveDigitsToBot(typedDigits, turn) {
 
 export const pressRoundButton = () => {
   return (dispatch, getState) => {
-    const { turn, typedDigits, bot } = getState()
-    const opponentDigits = bot.digits
+    const { turn, typedDigits, againstBot, bot } = getState()
+    let opponentDigits = []
+
+    if (againstBot === true) {
+      opponentDigits = bot.digits
+    }
     Promise.resolve(dispatch(saveDigits(typedDigits, opponentDigits, turn)))
       .then(() => dispatch(toggleNumericButtonsVisibility()))
       .then(() => dispatch(giveDigitsToBot(typedDigits, turn)))
