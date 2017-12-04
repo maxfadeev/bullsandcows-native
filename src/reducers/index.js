@@ -4,11 +4,15 @@ import typedDigits from './typedDigits'
 import numericButtonsVisibility from './numericButtonsVisibility'
 import bot from './bot'
 import againstBot from './againstBot'
+import guesses from './guesses'
+import scores from './scores'
 
 export default combineReducers({
   turn,
   typedDigits,
   numericButtonsVisibility,
   bot,
-  againstBot
+  againstBot,
+  guesses,
+  scores
 })
