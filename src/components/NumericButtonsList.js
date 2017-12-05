@@ -6,7 +6,8 @@ import {
   LayoutAnimation,
   View,
   Platform,
-  NativeModules
+  NativeModules,
+  Dimensions
 } from 'react-native'
 
 import NumericButton from './NumericButton'
@@ -27,7 +28,7 @@ export default class NumericButtonsList extends React.Component {
   componentWillReceiveProps(nextProps) {
     LayoutAnimation.spring()
     if (nextProps.numericButtonsVisibility === false) {
-      this.setState({ top: 200 })
+      this.setState({ top: height / 3 })
     } else {
       this.setState({ top: minTopPosition })
     }
@@ -53,7 +54,9 @@ export default class NumericButtonsList extends React.Component {
     )
   }
 }
-const minTopPosition = 15
+const minTopPosition = 20
+
+let { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   flatList: {
@@ -61,10 +64,7 @@ const styles = StyleSheet.create({
   },
   view: {
     position: 'absolute',
-    top: minTopPosition,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 300
   }
 })

@@ -7,7 +7,8 @@ import {
   View,
   Platform,
   NativeModules,
-  LayoutAnimation
+  LayoutAnimation,
+  Dimensions
 } from 'react-native'
 
 export default class RoundButton extends React.Component {
@@ -15,7 +16,7 @@ export default class RoundButton extends React.Component {
     super(props)
     this.state = {
       press: new Animated.Value(0),
-      top: 200,
+      top: height / 3,
       disabled: false
     }
 
@@ -28,7 +29,7 @@ export default class RoundButton extends React.Component {
   componentWillReceiveProps(nextProps) {
     LayoutAnimation.spring()
     if (nextProps.numericButtonsVisibility === true) {
-      this.setState({ top: 200 })
+      this.setState({ top: height / 3 })
     } else {
       this.setState({ top: 30 })
     }
@@ -74,7 +75,7 @@ export default class RoundButton extends React.Component {
           <Animated.View style={styles.container}>
             <Animated.View style={styles.shadow} />
             <Animated.View style={[styles.textView, { top: this.state.press }]}>
-              <Text style={styles.text}>Continue</Text>
+              <Text style={styles.text}>Turn</Text>
             </Animated.View>
           </Animated.View>
         </TouchableWithoutFeedback>
@@ -82,6 +83,8 @@ export default class RoundButton extends React.Component {
     )
   }
 }
+
+let { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
