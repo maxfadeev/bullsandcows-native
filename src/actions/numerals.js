@@ -55,7 +55,6 @@ export const pressRoundButton = () => {
 
     fetchDigits(againstBot ? bot : undefined)
       .then(fetchedDigits => {
-        console.log(fetchedDigits)
         dispatch(saveDigits(typedDigits, fetchedDigits, turn))
       })
       .then(() => dispatch(toggleNumericButtonsVisibility()))
