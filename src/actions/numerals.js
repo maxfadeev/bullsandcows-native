@@ -33,25 +33,18 @@ export const toggleNumericButtonsVisibility = () => {
   }
 }
 
-function fetchDigits() {
-  return {
-    type: FETCH_DIGITS
+function fetchDigits(bot) {
+  if (bot !== undefined) {
+    return Promise.resolve(bot.digits)
   }
+  return Promise.resolve()
 }
 
-function saveDigits(typedDigits, opponentDigits, turn) {
+function saveDigits(typedDigits, fetchedDigits, turn) {
   return {
     type: SAVE_DIGITS,
     typedDigits,
-    opponentDigits,
-    turn
-  }
-}
-
-function giveDigitsToBot(typedDigits, turn) {
-  return {
-    type: GIVE_DIGITS_TO_BOT,
-    typedDigits,
+    fetchedDigits,
     turn
   }
 }
@@ -59,13 +52,12 @@ function giveDigitsToBot(typedDigits, turn) {
 export const pressRoundButton = () => {
   return (dispatch, getState) => {
     const { turn, typedDigits, againstBot, bot } = getState()
-    let opponentDigits = []
 
-    if (againstBot === true) {
-      opponentDigits = bot.digits
-    }
-    Promise.resolve(dispatch(saveDigits(typedDigits, opponentDigits, turn)))
+    fetchDigits(againstBot ? bot : undefined)
+      .then(fetchedDigits => {
+        console.log(fetchedDigits)
+        dispatch(saveDigits(typedDigits, fetchedDigits, turn))
+      })
       .then(() => dispatch(toggleNumericButtonsVisibility()))
-      .then(() => dispatch(giveDigitsToBot(typedDigits, turn)))
   }
 }

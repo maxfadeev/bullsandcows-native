@@ -4,7 +4,7 @@ import { GUESS_TURN } from '../constants/Game'
 function getDefaultState() {
   return {
     typedDigits: [],
-    opponentDigits: []
+    fetchedDigits: []
   }
 }
 
@@ -14,7 +14,7 @@ const guesses = (state = getDefaultState(), action) => {
       if (action.turn === GUESS_TURN) {
         return {
           typedDigits: [...state.typedDigits, action.typedDigits],
-          opponentDigits: [...state.opponentDigits, action.opponentDigits]
+          fetchedDigits: [...state.fetchedDigits, action.fetchedDigits]
         }
       }
       return state

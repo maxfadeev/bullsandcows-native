@@ -4,7 +4,7 @@ import { SCORE_TURN } from '../constants/Game'
 function getDefaultState() {
   return {
     typedDigits: [],
-    opponentDigits: []
+    fetchedDigits: []
   }
 }
 
@@ -14,7 +14,7 @@ const scores = (state = getDefaultState(), action) => {
       if (action.turn === SCORE_TURN) {
         return {
           typedDigits: [...state.typedDigits, action.typedDigits],
-          opponentDigits: [...state.opponentDigits, action.opponentDigits]
+          fetchedDigits: [...state.fetchedDigits, action.fetchedDigits]
         }
       }
       return state

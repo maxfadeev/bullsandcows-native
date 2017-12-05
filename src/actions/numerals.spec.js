@@ -31,16 +31,4 @@ describe('numerals actions', () => {
     }
     expect(actions.toggleNumericButtonsVisibility()).toEqual(expectedAction)
   })
-
-  it('should create an action to press a round button', () => {
-    const turn = gameConstants.GUESS_TURN
-    const typedDigits = [1, 2, 3, 4]
-    const expectedAction = {
-      type: types.PRESS_ROUND_BUTTON,
-      turn,
-      yourDigits: typedDigits,
-      opponentsDigits: [1, 2, 3, 4]
-    }
-    expect(actions.pressRoundButton(turn, typedDigits)).toEqual(expectedAction)
-  })
 })
