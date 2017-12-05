@@ -75,7 +75,7 @@ export default class RoundButton extends React.Component {
           <Animated.View style={styles.container}>
             <Animated.View style={styles.shadow} />
             <Animated.View style={[styles.textView, { top: this.state.press }]}>
-              <Text style={styles.text}>Continue</Text>
+              <Text style={styles.text}>Turn</Text>
             </Animated.View>
           </Animated.View>
         </TouchableWithoutFeedback>
