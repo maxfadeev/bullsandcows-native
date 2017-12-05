@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, View, StyleSheet } from 'react-native'
+import { FlatList, View, StyleSheet, Platform } from 'react-native'
 
 import TypedDigit from './TypedDigit'
 
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 12,
-    marginTop: 10
+    marginTop: Platform.OS === 'android' ? 10 : 0
   },
   green: {
     backgroundColor: 'green'
