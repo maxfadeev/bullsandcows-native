@@ -35,10 +35,10 @@ export default class TypedDigit extends React.Component {
       <TouchableWithoutFeedback
         style={{ flex: 1 }}
         onPress={() => {
+          this.props.disableRoundButton()
           this.animate()
-          setTimeout(() => {
-            this.props.onPress()
-          }, 200)
+          setTimeout(() => this.props.onPress(), 200)
+          setTimeout(() => this.props.enableRoundButton(), 1500)
         }}
       >
         <Animated.Text
