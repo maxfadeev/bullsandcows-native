@@ -5,14 +5,17 @@ import TypedDigit from './TypedDigit'
 
 import { SCORE_TURN } from '../constants/Game'
 
-const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit }) => (
+const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
   <FlatList
     style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
       <View style={styles.container}>
-        <TypedDigit onPress={() => onDiscardDigit(item.digit, item.key)}>
+        <TypedDigit
+          onPress={() => onDiscardDigit(item.digit, item.key)}
+          {...props}
+        >
           {item.digit}
         </TypedDigit>
         <View

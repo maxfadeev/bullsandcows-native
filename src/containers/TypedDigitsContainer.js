@@ -27,14 +27,13 @@ class TypedDigitsContainer extends React.Component {
     const { typedDigits, turn, dispatch } = this.props
     return (
       <TypedDigitsList
-        typedDigits={typedDigits}
-        turn={turn}
         onDiscardDigit={(numeral, key) => {
           if (!typedDigits.includes(SUB)) {
             dispatch(toggleNumericButtonsVisibility())
           }
           dispatch(discardDigit(numeral, key))
         }}
+        {...this.props}
       />
     )
   }
