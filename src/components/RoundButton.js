@@ -18,6 +18,7 @@ export default class RoundButton extends React.Component {
       press: new Animated.Value(0),
       top: height / 3
     }
+    this.onPress = this.onPress.bind(this)
 
     if (Platform.OS === 'android') {
       NativeModules.UIManager.setLayoutAnimationEnabledExperimental &&
@@ -27,7 +28,7 @@ export default class RoundButton extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     LayoutAnimation.spring()
-    if (nextProps.numericButtonsVisibility === true) {
+    if (nextProps.roundButtonSpring === false) {
       this.setState({ top: height / 3 })
     } else {
       this.setState({ top: 30 })
@@ -35,39 +36,48 @@ export default class RoundButton extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return (
-      nextProps.numericButtonsVisibility !== this.props.numericButtonsVisibility
-    )
+    return nextProps.roundButtonSpring !== this.props.roundButtonSpring
   }
 
-  animate() {
-    Animated.stagger(100, [
-      Animated.spring(this.state.press, {
-        toValue: 4,
-        speed: 20,
-        bounciness: 10
-      }),
-      Animated.spring(this.state.press, {
-        toValue: 0,
-        speed: 20,
-        bounciness: 10
+  componentDidUpdate() {
+    this.pressUp()
+  }
+
+  pressDown(cb) {
+    Animated.spring(this.state.press, {
+      toValue: 4,
+      speed: 20,
+      bounciness: 10
+    }).start(cb)
+  }
+
+  pressUp() {
+    Animated.spring(this.state.press, {
+      toValue: 0,
+      speed: 20,
+      bounciness: 10
+    }).start()
+  }
+
+  onPress() {
+    const {
+      disableRoundButton,
+      toggleTypedDigitsLock,
+      onRoundButtonPress
+    } = this.props
+    if (!this.props.isDisabled) {
+      toggleTypedDigitsLock()
+      disableRoundButton()
+      this.pressDown(() => {
+        onRoundButtonPress()
       })
-    ]).start()
+    }
   }
 
   render() {
     return (
       <View style={[styles.view, { top: this.state.top }]}>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            if (!this.props.disabled) {
-              this.props.disableRoundButton()
-              this.animate()
-              setTimeout(() => this.props.onRoundButtonPress(), 200)
-              setTimeout(() => this.props.enableRoundButton(), 1500)
-            }
-          }}
-        >
+        <TouchableWithoutFeedback onPress={this.onPress}>
           <Animated.View style={styles.container}>
             <Animated.View style={styles.shadow} />
             <Animated.View style={[styles.textView, { top: this.state.press }]}>

@@ -10,10 +10,20 @@ export default class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      isRoundButtonDisabled: false
+      isRoundButtonDisabled: false,
+      isTypedDigitsLocked: false
     }
-    this.enableRoundButton = this.enableRoundButton.bind(this)
-    this.disableRoundButton = this.disableRoundButton.bind(this)
+    this.handleRoundButton = {
+      enableRoundButton: this.enableRoundButton.bind(this),
+      disableRoundButton: this.disableRoundButton.bind(this)
+    }
+    this.toggleTypedDigitsLock = this.toggleTypedDigitsLock.bind(this)
+  }
+
+  enableRoundButton() {
+    this.setState({
+      isRoundButtonDisabled: false
+    })
   }
 
   disableRoundButton() {
@@ -22,9 +32,9 @@ export default class Game extends React.Component {
     })
   }
 
-  enableRoundButton() {
+  toggleTypedDigitsLock() {
     this.setState({
-      isRoundButtonDisabled: false
+      isTypedDigitsLocked: !this.state.isTypedDigitsLocked
     })
   }
 
@@ -34,16 +44,17 @@ export default class Game extends React.Component {
         <View style={{ flex: 6 }} />
         <View style={{ flex: 1 }}>
           <TypedDigitsContainer
-            disableRoundButton={this.disableRoundButton}
-            enableRoundButton={this.enableRoundButton}
+            {...this.handleRoundButton}
+            isLocked={this.state.isTypedDigitsLocked}
+            toggleTypedDigitsLock={this.toggleTypedDigitsLock}
           />
         </View>
         <View style={{ flex: 3, width: 300 }}>
           <NumericButtonsContainer numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]} />
           <RoundButtonContainer
-            disableRoundButton={this.disableRoundButton}
-            enableRoundButton={this.enableRoundButton}
-            disabled={this.state.isRoundButtonDisabled}
+            {...this.handleRoundButton}
+            isDisabled={this.state.isRoundButtonDisabled}
+            toggleTypedDigitsLock={this.toggleTypedDigitsLock}
           />
         </View>
       </View>

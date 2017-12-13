@@ -9,38 +9,44 @@ export default class TypedDigit extends React.Component {
     this.state = {
       opacity: new Animated.Value(1)
     }
+
+    this.onPress = this.onPress.bind(this)
   }
 
   shouldComponentUpdate(nextProps) {
     return nextProps.children !== this.props.children
   }
 
-  animate() {
+  fade(cb) {
     if (this.props.children !== SUB) {
-      Animated.sequence([
-        Animated.timing(this.state.opacity, {
-          toValue: 0,
-          duration: 200
-        }),
-        Animated.timing(this.state.opacity, {
-          toValue: 1,
-          duration: 50
-        })
-      ]).start()
+      Animated.timing(this.state.opacity, {
+        toValue: 0,
+        duration: 200
+      }).start(cb)
+    }
+  }
+
+  brighten() {
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: 20
+    }).start()
+  }
+
+  onPress() {
+    const { isLocked, disableRoundButton, onPress } = this.props
+    if (!isLocked) {
+      disableRoundButton()
+      this.fade(() => {
+        onPress()
+        this.brighten()
+      })
     }
   }
 
   render() {
     return (
-      <TouchableWithoutFeedback
-        style={{ flex: 1 }}
-        onPress={() => {
-          this.props.disableRoundButton()
-          this.animate()
-          setTimeout(() => this.props.onPress(), 200)
-          setTimeout(() => this.props.enableRoundButton(), 1500)
-        }}
-      >
+      <TouchableWithoutFeedback style={{ flex: 1 }} onPress={this.onPress}>
         <Animated.Text
           style={StyleSheet.flatten([
             styles.text,
