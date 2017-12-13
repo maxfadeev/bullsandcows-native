@@ -27,8 +27,8 @@ describe('numerals actions', () => {
 
   it('should create an action to toggle numeric buttons visibility', () => {
     const expectedAction = {
-      type: types.TOGGLE_NUMERIC_BUTTONS_VISIBILITY
+      type: types.TOGGLE_ROUND_BUTTON_SPRING
     }
-    expect(actions.toggleNumericButtonsVisibility()).toEqual(expectedAction)
+    expect(actions.toggleroundButtonSpring()).toEqual(expectedAction)
   })
 })

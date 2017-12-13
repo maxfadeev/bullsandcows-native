@@ -1,12 +1,14 @@
 import {
   PRESS_NUMERIC_BUTTON,
   DISCARD_TYPED_DIGIT,
-  TOGGLE_NUMERIC_BUTTONS_VISIBILITY,
+  TOGGLE_ROUND_BUTTON_SPRING,
   SHOW_NUMERIC_BUTTONS,
   PRESS_ROUND_BUTTON,
   GIVE_DIGITS_TO_BOT,
   SAVE_DIGITS,
-  FETCH_DIGITS
+  FETCH_DIGITS,
+  DISABLE_ROUND_BUTTON,
+  ENABLE_ROUND_BUTTON
 } from '../constants/ActionTypes'
 
 import { calculateChoices, getGuess } from '../api/bot'
@@ -27,9 +29,9 @@ export const discardDigit = (numeral, key) => {
   }
 }
 
-export const toggleNumericButtonsVisibility = () => {
+export const toggleRoundButtonSpring = () => {
   return {
-    type: TOGGLE_NUMERIC_BUTTONS_VISIBILITY
+    type: TOGGLE_ROUND_BUTTON_SPRING
   }
 }
 
@@ -54,9 +56,9 @@ export const pressRoundButton = () => {
     const { turn, typedDigits, againstBot, bot } = getState()
 
     fetchDigits(againstBot ? bot : undefined)
-      .then(fetchedDigits => {
+      .then(fetchedDigits =>
         dispatch(saveDigits(typedDigits, fetchedDigits, turn))
-      })
-      .then(() => dispatch(toggleNumericButtonsVisibility()))
+      )
+      .then(() => dispatch(toggleRoundButtonSpring()))
   }
 }
