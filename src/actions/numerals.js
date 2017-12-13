@@ -2,16 +2,8 @@ import {
   PRESS_NUMERIC_BUTTON,
   DISCARD_TYPED_DIGIT,
   TOGGLE_ROUND_BUTTON_SPRING,
-  SHOW_NUMERIC_BUTTONS,
-  PRESS_ROUND_BUTTON,
-  GIVE_DIGITS_TO_BOT,
-  SAVE_DIGITS,
-  FETCH_DIGITS,
-  DISABLE_ROUND_BUTTON,
-  ENABLE_ROUND_BUTTON
+  SAVE_DIGITS
 } from '../constants/ActionTypes'
-
-import { calculateChoices, getGuess } from '../api/bot'
 
 export const pressNumericButton = (numeral, turn) => {
   return {
