@@ -9,7 +9,7 @@ export default class NumericButton extends React.Component {
       fontZoom: new Animated.Value(fontSize)
     }
 
-    this.onPress = throttle(this.onPress, 400, { trailing: false }).bind(this)
+    this.onPress = throttle(this.onPress, 1000, { trailing: false }).bind(this)
   }
 
   spring() {
