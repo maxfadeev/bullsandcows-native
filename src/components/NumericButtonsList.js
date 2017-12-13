@@ -27,7 +27,7 @@ export default class NumericButtonsList extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     LayoutAnimation.spring()
-    if (nextProps.numericButtonsVisibility === false) {
+    if (nextProps.roundButtonSpring === true) {
       this.setState({ top: height / 3 })
     } else {
       this.setState({ top: minTopPosition })

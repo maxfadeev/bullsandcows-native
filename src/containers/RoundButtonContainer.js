@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import RoundButton from '../components/RoundButton'
 import { pressRoundButton } from '../actions/numerals'
 
-const mapStateToProps = ({ turn, typedDigits, numericButtonsVisibility }) => {
+const mapStateToProps = ({ roundButtonSpring }) => {
   return {
-    numericButtonsVisibility
+    roundButtonSpring
   }
 }
 
