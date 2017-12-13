@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import TypedDigitsList from '../components/TypedDigitsList'
 import {
   discardDigit,
-  toggleNumericButtonsVisibility
+  toggleRoundButtonSpring,
+  enableRoundButton,
+  disableRoundButton
 } from '../actions/numerals'
 import { SUB } from '../constants/Game'
 
@@ -16,10 +18,17 @@ const mapStateToProps = ({ typedDigits, turn }) => {
 }
 
 class TypedDigitsContainer extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.typedDigits.length !== this.props.typedDigits.length) {
+      this.props.toggleTypedDigitsLock()
+    }
+  }
+
   componentDidUpdate() {
-    const { typedDigits, dispatch } = this.props
-    if (!typedDigits.includes(SUB)) {
-      dispatch(toggleNumericButtonsVisibility())
+    const { typedDigits, dispatch, isLocked } = this.props
+    if (!typedDigits.includes(SUB) && !isLocked) {
+      this.props.enableRoundButton()
+      dispatch(toggleRoundButtonSpring())
     }
   }
 
@@ -29,7 +38,8 @@ class TypedDigitsContainer extends React.Component {
       <TypedDigitsList
         onDiscardDigit={(numeral, key) => {
           if (!typedDigits.includes(SUB)) {
-            dispatch(toggleNumericButtonsVisibility())
+            this.props.disableRoundButton()
+            dispatch(toggleRoundButtonSpring())
           }
           dispatch(discardDigit(numeral, key))
         }}
