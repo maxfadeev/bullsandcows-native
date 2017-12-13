@@ -1,5 +1,6 @@
 import React from 'react'
 import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
+import throttle from 'lodash.throttle'
 
 import { SUB } from '../constants/Game'
 
@@ -10,7 +11,7 @@ export default class TypedDigit extends React.Component {
       opacity: new Animated.Value(1)
     }
 
-    this.onPress = this.onPress.bind(this)
+    this.onPress = throttle(this.onPress, 300, { trailing: false }).bind(this)
   }
 
   shouldComponentUpdate(nextProps) {
