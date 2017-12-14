@@ -1,4 +1,4 @@
-import { SAVE_DIGITS } from '../constants/ActionTypes'
+import { FETCH_DIGITS_SUCCESS } from '../constants/ActionTypes'
 import { GUESS_TURN, SCORE_TURN } from '../constants/Game'
 
 import { createSecret, calculateChoices, getGuess } from '../api/bot'
@@ -15,7 +15,7 @@ function getDefaultState() {
 
 const bot = (state = getDefaultState(), action) => {
   switch (action.type) {
-    case SAVE_DIGITS:
+    case FETCH_DIGITS_SUCCESS:
       if (action.turn === GUESS_TURN) {
         const score = scoreCalc(action.typedDigits, state.secret)
         return {

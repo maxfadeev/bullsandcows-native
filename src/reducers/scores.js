@@ -1,4 +1,4 @@
-import { SAVE_DIGITS } from '../constants/ActionTypes'
+import { FETCH_DIGITS_SUCCESS } from '../constants/ActionTypes'
 import { SCORE_TURN } from '../constants/Game'
 
 function getDefaultState() {
@@ -10,7 +10,7 @@ function getDefaultState() {
 
 const scores = (state = getDefaultState(), action) => {
   switch (action.type) {
-    case SAVE_DIGITS:
+    case FETCH_DIGITS_SUCCESS:
       if (action.turn === SCORE_TURN) {
         return {
           typedDigits: [...state.typedDigits, action.typedDigits],
