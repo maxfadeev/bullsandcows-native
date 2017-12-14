@@ -33,9 +33,9 @@ export default class Game extends React.Component {
   }
 
   toggleTypedDigitsLock() {
-    this.setState({
-      isTypedDigitsLocked: !this.state.isTypedDigitsLocked
-    })
+    this.setState(state => ({
+      isTypedDigitsLocked: !state.isTypedDigitsLocked
+    }))
   }
 
   render() {
