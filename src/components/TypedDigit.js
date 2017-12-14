@@ -11,7 +11,7 @@ export default class TypedDigit extends React.Component {
       opacity: new Animated.Value(1)
     }
 
-    this.onPress = throttle(this.onPress, 300, { trailing: false }).bind(this)
+    this.onPress = this.onPress.bind(this)
   }
 
   shouldComponentUpdate(nextProps) {
