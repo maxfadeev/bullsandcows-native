@@ -8,15 +8,15 @@ describe('turn reducer', () => {
     expect(reducer(undefined, {})).toEqual(GUESS_TURN)
   })
 
-  it('should handle SAVE_DIGITS', () => {
+  it('should handle FETCH_DIGITS_SUCCESS', () => {
     expect(
       reducer(undefined, {
-        type: types.SAVE_DIGITS
+        type: types.FETCH_DIGITS_SUCCESS
       })
     ).toEqual(SCORE_TURN)
     expect(
       reducer(SCORE_TURN, {
-        type: types.SAVE_DIGITS
+        type: types.FETCH_DIGITS_SUCCESS
       })
     ).toEqual(GUESS_TURN)
   })
