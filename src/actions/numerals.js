@@ -2,7 +2,7 @@ import {
   PRESS_NUMERIC_BUTTON,
   DISCARD_TYPED_DIGIT,
   TOGGLE_ROUND_BUTTON_SPRING,
-  SAVE_DIGITS
+  FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
 
 export const pressNumericButton = (numeral, turn) => {
@@ -34,12 +34,19 @@ function fetchDigits(bot) {
   return Promise.resolve()
 }
 
-function saveDigits(typedDigits, fetchedDigits, turn) {
+function fetchDigitsSuccess(typedDigits, fetchedDigits, turn) {
   return {
-    type: SAVE_DIGITS,
+    type: FETCH_DIGITS_SUCCESS,
     typedDigits,
     fetchedDigits,
     turn
+  }
+}
+
+function fetchDigitsFailure(ex) {
+  return {
+    type: FETCH_DIGITS_FAILURE,
+    ex
   }
 }
 
@@ -47,10 +54,11 @@ export const pressRoundButton = () => {
   return (dispatch, getState) => {
     const { turn, typedDigits, againstBot, bot } = getState()
 
-    fetchDigits(againstBot ? bot : undefined)
+    return fetchDigits(againstBot ? bot : undefined)
       .then(fetchedDigits =>
-        dispatch(saveDigits(typedDigits, fetchedDigits, turn))
+        dispatch(fetchDigitsSuccess(typedDigits, fetchedDigits, turn))
       )
       .then(() => dispatch(toggleRoundButtonSpring()))
+      .catch(ex => dispatch(fetchDigitsFailure(ex)))
   }
 }
