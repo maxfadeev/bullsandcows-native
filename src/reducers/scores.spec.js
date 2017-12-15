@@ -12,8 +12,8 @@ describe('scores reducer', () => {
   })
 
   it('should handle FETCH_DIGITS_SUCCESS', () => {
-    const typedDigits = [1, 2, 3, 4]
-    const fetchedDigits = [5, 6, 7, 8]
+    const typedDigits = [1, 2]
+    const fetchedDigits = [0, 0]
     expect(
       reducer(initialState, {
         type: types.FETCH_DIGITS_SUCCESS,
