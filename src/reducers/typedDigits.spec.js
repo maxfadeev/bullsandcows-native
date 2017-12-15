@@ -110,4 +110,28 @@ describe('typedDigits reducer', () => {
       ).toEqual([1, 2])
     })
   })
+
+  describe('handle DISCARD_TYPED_DIGIT', () => {
+    it('should discard the numeral', () => {
+      const numeral = 1
+      const key = 0
+      expect(
+        reducer([1, 2, 3, 4], {
+          type: types.DISCARD_TYPED_DIGIT,
+          key
+        })
+      ).toEqual([SUB, 2, 3, 4])
+    })
+  })
+
+  describe('handle FETCH_DIGITS_SUCCESS', () => {
+    it('should wape out all numerals', () => {
+      expect(
+        reducer([1, 2, 3, 4], {
+          type: types.FETCH_DIGITS_SUCCESS,
+          turn: GUESS_TURN
+        })
+      ).toEqual([SUB, SUB])
+    })
+  })
 })
