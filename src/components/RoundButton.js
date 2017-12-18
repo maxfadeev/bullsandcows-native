@@ -59,9 +59,11 @@ export default class RoundButton extends React.Component {
     const {
       disableRoundButton,
       toggleTypedDigitsLock,
-      onRoundButtonPress
+      onRoundButtonPress,
+      isDisabled
     } = this.props
-    if (!this.props.isDisabled) {
+
+    if (!isDisabled) {
       toggleTypedDigitsLock()
       disableRoundButton()
       this.pressDown(() => {
