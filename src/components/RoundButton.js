@@ -8,12 +8,15 @@ import {
   Dimensions
 } from 'react-native'
 
+import RoundButtonSpiner from './RoundButtonSpinner'
+
 export default class RoundButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       press: new Animated.Value(0),
-      translateY: new Animated.Value(windowHeight / 3)
+      translateY: new Animated.Value(windowHeight / 3),
+      text: 'Turn'
     }
     this.onPress = this.onPress.bind(this)
   }
@@ -25,16 +28,18 @@ export default class RoundButton extends React.Component {
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
-      }).start()
+      }).start(() => {
+        if (nextProps.roundButtonSpring === false) {
+          this.setState({ isLoading: false })
+        }
+      })
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.roundButtonSpring !== this.props.roundButtonSpring
-  }
-
   componentDidUpdate() {
-    this.pressUp()
+    if (!this.state.isLoading) {
+      this.pressUp()
+    }
   }
 
   pressDown(cb) {
@@ -64,6 +69,8 @@ export default class RoundButton extends React.Component {
     } = this.props
 
     if (!isDisabled) {
+      this.setState({ isLoading: true })
+
       toggleTypedDigitsLock()
       disableRoundButton()
       this.pressDown(() => {
@@ -103,7 +110,11 @@ export default class RoundButton extends React.Component {
                 { transform: [{ translateY: this.state.press }] }
               ]}
             >
-              <Text style={styles.text}>Turn</Text>
+              {this.state.isLoading ? (
+                <RoundButtonSpiner />
+              ) : (
+                <Text style={styles.text}>Turn</Text>
+              )}
             </Animated.View>
           </Animated.View>
         </TouchableWithoutFeedback>
