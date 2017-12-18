@@ -5,8 +5,7 @@ import {
   UIManager,
   LayoutAnimation,
   View,
-  Platform,
-  NativeModules,
+  Animated,
   Dimensions
 } from 'react-native'
 
@@ -16,28 +15,30 @@ export default class NumericButtonsList extends React.Component {
   constructor() {
     super()
     this.state = {
-      top: minTopPosition
-    }
-
-    if (Platform.OS === 'android') {
-      NativeModules.UIManager.setLayoutAnimationEnabledExperimental &&
-        NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true)
+      translateY: new Animated.Value(20)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    LayoutAnimation.spring()
-    if (nextProps.roundButtonSpring === true) {
-      this.setState({ top: height / 3 })
-    } else {
-      this.setState({ top: minTopPosition })
+    if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
+      Animated.spring(this.state.translateY, {
+        toValue: nextProps.roundButtonSpring === true ? windowHeight / 3 : 30,
+        speed: 25,
+        bounciness: 15,
+        useNativeDriver: true
+      }).start()
     }
   }
 
   render() {
     const { numerals, turn, onNumericButtonPress } = this.props
     return (
-      <View style={[styles.view, { top: this.state.top }]}>
+      <Animated.View
+        style={[
+          styles.view,
+          { transform: [{ translateY: this.state.translateY }] }
+        ]}
+      >
         <FlatList
           style={styles.flatList}
           numColumns={5}
@@ -50,13 +51,12 @@ export default class NumericButtonsList extends React.Component {
             </NumericButton>
           )}
         />
-      </View>
+      </Animated.View>
     )
   }
 }
-const minTopPosition = 20
 
-let { height } = Dimensions.get('window')
+const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   flatList: {

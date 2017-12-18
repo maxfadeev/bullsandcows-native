@@ -5,9 +5,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Platform,
-  NativeModules,
-  LayoutAnimation,
   Dimensions
 } from 'react-native'
 
@@ -16,22 +13,19 @@ export default class RoundButton extends React.Component {
     super(props)
     this.state = {
       press: new Animated.Value(0),
-      top: height / 3
+      translateY: new Animated.Value(windowHeight / 3)
     }
     this.onPress = this.onPress.bind(this)
-
-    if (Platform.OS === 'android') {
-      NativeModules.UIManager.setLayoutAnimationEnabledExperimental &&
-        NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true)
-    }
   }
 
   componentWillReceiveProps(nextProps) {
-    LayoutAnimation.spring()
-    if (nextProps.roundButtonSpring === false) {
-      this.setState({ top: height / 3 })
-    } else {
-      this.setState({ top: 30 })
+    if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
+      Animated.spring(this.state.translateY, {
+        toValue: nextProps.roundButtonSpring === false ? windowHeight / 3 : 30,
+        speed: 25,
+        bounciness: 15,
+        useNativeDriver: true
+      }).start()
     }
   }
 
@@ -46,16 +40,18 @@ export default class RoundButton extends React.Component {
   pressDown(cb) {
     Animated.spring(this.state.press, {
       toValue: 4,
-      speed: 20,
-      bounciness: 10
+      speed: 50,
+      bounciness: 20,
+      useNativeDriver: true
     }).start(cb)
   }
 
   pressUp() {
     Animated.spring(this.state.press, {
       toValue: 0,
-      speed: 20,
-      bounciness: 10
+      speed: 50,
+      bounciness: 0,
+      useNativeDriver: true
     }).start()
   }
 
@@ -76,21 +72,45 @@ export default class RoundButton extends React.Component {
 
   render() {
     return (
-      <View style={[styles.view, { top: this.state.top }]}>
+      <Animated.View
+        style={[
+          styles.view,
+          { transform: [{ translateY: this.state.translateY }] }
+        ]}
+      >
         <TouchableWithoutFeedback onPress={this.onPress}>
-          <Animated.View style={styles.container}>
+          <Animated.View
+            style={[
+              styles.container,
+              {
+                transform: [
+                  {
+                    scale: this.state.press.interpolate({
+                      inputRange: [0, 4],
+                      outputRange: [1, 0.9]
+                    })
+                  }
+                ]
+              }
+            ]}
+          >
             <Animated.View style={styles.shadow} />
-            <Animated.View style={[styles.textView, { top: this.state.press }]}>
+            <Animated.View
+              style={[
+                styles.textView,
+                { transform: [{ translateY: this.state.press }] }
+              ]}
+            >
               <Text style={styles.text}>Turn</Text>
             </Animated.View>
           </Animated.View>
         </TouchableWithoutFeedback>
-      </View>
+      </Animated.View>
     )
   }
 }
 
-let { height } = Dimensions.get('window')
+const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
@@ -108,9 +128,6 @@ const styles = StyleSheet.create({
   textView: {
     position: 'absolute',
     top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
     width: 100,
     height: 100,
     backgroundColor: '#212121',
@@ -121,20 +138,12 @@ const styles = StyleSheet.create({
   shadow: {
     position: 'absolute',
     top: 4,
-    bottom: 0,
-    left: 0,
-    right: 0,
     width: 100,
     height: 100,
     backgroundColor: '#5c5c5c',
     borderRadius: 100
   },
   view: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
     height: 110,
     justifyContent: 'center',
     alignItems: 'center'

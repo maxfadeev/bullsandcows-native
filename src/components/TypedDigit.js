@@ -1,6 +1,5 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
-import throttle from 'lodash.throttle'
+import { TouchableOpacity, Animated, StyleSheet } from 'react-native'
 
 import { SUB } from '../constants/Game'
 
@@ -18,45 +17,21 @@ export default class TypedDigit extends React.Component {
     return nextProps.children !== this.props.children
   }
 
-  fade(cb) {
-    if (this.props.children !== SUB) {
-      Animated.timing(this.state.opacity, {
-        toValue: 0,
-        duration: 200
-      }).start(cb)
-    }
-  }
-
-  brighten() {
-    Animated.timing(this.state.opacity, {
-      toValue: 1,
-      duration: 20
-    }).start()
-  }
-
   onPress() {
-    const { isLocked, disableRoundButton, onPress } = this.props
+    const { isLocked, disableRoundButton, onDiscard } = this.props
     if (!isLocked) {
       disableRoundButton()
-      this.fade(() => {
-        onPress()
-        this.brighten()
-      })
+      onDiscard()
     }
   }
 
   render() {
     return (
-      <TouchableWithoutFeedback style={{ flex: 1 }} onPress={this.onPress}>
-        <Animated.Text
-          style={StyleSheet.flatten([
-            styles.text,
-            { opacity: this.state.opacity }
-          ])}
-        >
+      <TouchableOpacity style={{ flex: 1 }} onPress={this.onPress}>
+        <Animated.Text style={[styles.text, { opacity: this.state.opacity }]}>
           {this.props.children}
         </Animated.Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     )
   }
 }
