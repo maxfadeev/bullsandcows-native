@@ -18,15 +18,19 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
         >
           {item.digit}
         </TypedDigit>
-        <View
-          style={
-            turn === SCORE_TURN
-              ? item.key === 0
-                ? [styles.icon, styles.green]
-                : [styles.icon, styles.orange]
-              : {}
-          }
-        />
+        {turn === SCORE_TURN && (
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <View
+              style={
+                turn === SCORE_TURN
+                  ? item.key === 0
+                    ? [styles.icon, styles.green]
+                    : [styles.icon, styles.orange]
+                  : {}
+              }
+            />
+          </View>
+        )}
       </View>
     )}
   />
@@ -39,6 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row'
   },
   icon: {
