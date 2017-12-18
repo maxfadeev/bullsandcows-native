@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   TouchableWithoutFeedback,
   Animated,
@@ -8,15 +8,18 @@ import {
   Dimensions
 } from 'react-native'
 
-import RoundButtonSpiner from './RoundButtonSpinner'
+import RoundButtonSpinner from './RoundButtonSpinner'
 
-export default class RoundButton extends React.Component {
+export default class RoundButton extends Component {
   constructor(props) {
     super(props)
+
+    this.windowHeight = Dimensions.get('window').height
+
     this.state = {
       press: new Animated.Value(0),
-      translateY: new Animated.Value(windowHeight / 3),
-      text: 'Turn'
+      translateY: new Animated.Value(this.windowHeight / 3),
+      isLoading: false
     }
     this.onPress = this.onPress.bind(this)
   }
@@ -24,7 +27,8 @@ export default class RoundButton extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.roundButtonSpring === false ? windowHeight / 3 : 30,
+        toValue:
+          nextProps.roundButtonSpring === false ? this.windowHeight / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
@@ -111,7 +115,7 @@ export default class RoundButton extends React.Component {
               ]}
             >
               {this.state.isLoading ? (
-                <RoundButtonSpiner />
+                <RoundButtonSpinner />
               ) : (
                 <Text style={styles.text}>Turn</Text>
               )}
@@ -122,8 +126,6 @@ export default class RoundButton extends React.Component {
     )
   }
 }
-
-const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
