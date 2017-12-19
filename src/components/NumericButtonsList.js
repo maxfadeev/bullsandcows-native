@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   FlatList,
   StyleSheet,
@@ -10,8 +10,9 @@ import {
 } from 'react-native'
 
 import NumericButton from './NumericButton'
+import { WINDOW_HEIGHT } from '../constants/Game'
 
-export default class NumericButtonsList extends React.Component {
+export default class NumericButtonsList extends Component {
   constructor() {
     super()
     this.state = {
@@ -22,7 +23,7 @@ export default class NumericButtonsList extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.roundButtonSpring === true ? windowHeight / 3 : 30,
+        toValue: nextProps.roundButtonSpring === true ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
@@ -55,8 +56,6 @@ export default class NumericButtonsList extends React.Component {
     )
   }
 }
-
-const windowHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   flatList: {
