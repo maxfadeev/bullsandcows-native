@@ -9,16 +9,14 @@ import {
 } from 'react-native'
 
 import RoundButtonSpinner from './RoundButtonSpinner'
+import { WINDOW_HEIGHT } from '../constants/Game'
 
 export default class RoundButton extends Component {
   constructor(props) {
     super(props)
-
-    this.windowHeight = Dimensions.get('window').height
-
     this.state = {
       press: new Animated.Value(0),
-      translateY: new Animated.Value(this.windowHeight / 3),
+      translateY: new Animated.Value(WINDOW_HEIGHT / 3),
       isLoading: false
     }
     this.onPress = this.onPress.bind(this)
@@ -27,8 +25,7 @@ export default class RoundButton extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
       Animated.spring(this.state.translateY, {
-        toValue:
-          nextProps.roundButtonSpring === false ? this.windowHeight / 3 : 30,
+        toValue: nextProps.roundButtonSpring === false ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
