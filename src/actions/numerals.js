@@ -27,7 +27,7 @@ export const toggleRoundButtonSpring = () => {
   }
 }
 
-function fetchDigits(bot) {
+function fetchDigitsRequest(bot) {
   if (bot !== undefined) {
     return Promise.resolve(bot.digits)
   }
@@ -50,15 +50,22 @@ function fetchDigitsFailure(ex) {
   }
 }
 
-export const pressRoundButton = () => {
+function fetchDigits(bot) {
   return (dispatch, getState) => {
     const { turn, typedDigits, againstBot, bot } = getState()
 
-    return fetchDigits(againstBot ? bot : undefined)
+    return fetchDigitsRequest(againstBot ? bot : undefined)
       .then(fetchedDigits =>
         dispatch(fetchDigitsSuccess(typedDigits, fetchedDigits, turn))
       )
-      .then(() => dispatch(toggleRoundButtonSpring()))
       .catch(ex => dispatch(fetchDigitsFailure(ex)))
+  }
+}
+
+export const pressRoundButton = () => {
+  return dispatch => {
+    return dispatch(fetchDigits()).then(() =>
+      dispatch(toggleRoundButtonSpring())
+    )
   }
 }
