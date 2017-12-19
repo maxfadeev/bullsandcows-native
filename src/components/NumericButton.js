@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { TouchableWithoutFeedback, StyleSheet, Animated } from 'react-native'
 
-export default class NumericButton extends React.Component {
+export default class NumericButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -60,8 +60,6 @@ export default class NumericButton extends React.Component {
     )
   }
 }
-
-const fontSize = 50
 
 const styles = StyleSheet.create({
   text: {
