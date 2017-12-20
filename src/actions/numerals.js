@@ -5,6 +5,10 @@ import {
   FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
 
+import { GUESS_TURN, SCORE_TURN } from '../constants/Game'
+
+import simpleBot from '../bot'
+
 export const pressNumericButton = (numeral, turn) => {
   return {
     type: PRESS_NUMERIC_BUTTON,
@@ -27,9 +31,30 @@ export const toggleRoundButtonSpring = () => {
   }
 }
 
-function fetchDigitsRequest(bot) {
-  if (bot !== undefined) {
-    return Promise.resolve(bot.digits)
+function fetchBotDigits(typedDigits, turn) {
+  if (turn === GUESS_TURN) {
+    const guess = [...simpleBot.lastGuess]
+    // In order not to keep opponent's digits inside the bot object,
+    // score calculation(it is not heavy) is called before returning the guess
+    // so the main thread is not blocked
+    simpleBot.score(typedDigits)
+
+    return Promise.resolve(guess)
+  }
+
+  if (turn === SCORE_TURN) {
+    const score = [...simpleBot.lastScore]
+    // Same reason for calling the guess calculation
+    // (see explanation above for the guess turn)
+    simpleBot.guess(typedDigits)
+
+    return Promise.resolve(score)
+  }
+}
+
+function fetchDigitsRequest(typedDigits, turn, againstBot = false) {
+  if (againstBot) {
+    return fetchBotDigits(typedDigits, turn)
   }
   return Promise.resolve()
 }
@@ -52,9 +77,9 @@ function fetchDigitsFailure(ex) {
 
 function fetchDigits(bot) {
   return (dispatch, getState) => {
-    const { turn, typedDigits, againstBot, bot } = getState()
+    const { turn, typedDigits, againstBot } = getState()
 
-    return fetchDigitsRequest(againstBot ? bot : undefined)
+    return fetchDigitsRequest(typedDigits, turn, againstBot)
       .then(fetchedDigits =>
         dispatch(fetchDigitsSuccess(typedDigits, fetchedDigits, turn))
       )
