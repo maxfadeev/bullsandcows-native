@@ -75,7 +75,7 @@ function fetchDigitsFailure(ex) {
   }
 }
 
-function fetchDigits(bot) {
+function fetchDigits() {
   return (dispatch, getState) => {
     const { turn, typedDigits, againstBot } = getState()
 
