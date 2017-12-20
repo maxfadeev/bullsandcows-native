@@ -31,7 +31,9 @@ export class SimpleBot extends Bot {
 
   guess(score) {
     this._choices = this.filterChoices(this._choices, this.lastGuess, score)
-    this.lastGuess = this._choices[0]
+    if (this._choices.length > 0) {
+      this.lastGuess = this._choices[0]
+    }
     return this.lastGuess
   }
 
