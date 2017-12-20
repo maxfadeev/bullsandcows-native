@@ -35,8 +35,7 @@ function fetchBotDigits(typedDigits, turn) {
   if (turn === GUESS_TURN) {
     const guess = [...simpleBot.lastGuess]
     // In order not to keep opponent's digits inside the bot object,
-    // score calculation(it is not heavy) is called before returning the guess
-    // so the main thread is not blocked
+    // score calculation is not heavy and is called before returning the guess
     simpleBot.score(typedDigits)
 
     return Promise.resolve(guess)
