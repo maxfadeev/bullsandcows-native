@@ -1,13 +1,5 @@
 import React, { Component } from 'react'
-import {
-  FlatList,
-  StyleSheet,
-  UIManager,
-  LayoutAnimation,
-  View,
-  Animated,
-  Dimensions
-} from 'react-native'
+import { FlatList, StyleSheet, View, Animated, Dimensions } from 'react-native'
 
 import NumericButton from './NumericButton'
 import { WINDOW_HEIGHT } from '../constants/Game'
