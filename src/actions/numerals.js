@@ -59,7 +59,6 @@ function fetchDigitsRequest(typedDigits, turn, againstBot = false) {
 }
 
 function fetchDigitsSuccess(typedDigits, fetchedDigits, turn) {
-  console.log(fetchedDigits)
   return {
     type: FETCH_DIGITS_SUCCESS,
     typedDigits,
