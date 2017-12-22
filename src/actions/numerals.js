@@ -59,6 +59,7 @@ function fetchDigitsRequest(typedDigits, turn, againstBot = false) {
 }
 
 function fetchDigitsSuccess(typedDigits, fetchedDigits, turn) {
+  console.log(fetchedDigits)
   return {
     type: FETCH_DIGITS_SUCCESS,
     typedDigits,
@@ -75,21 +76,25 @@ function fetchDigitsFailure(ex) {
 }
 
 function fetchDigits() {
-  return (dispatch, getState) => {
+  return async (dispatch, getState) => {
     const { turn, typedDigits, againstBot } = getState()
 
-    return fetchDigitsRequest(typedDigits, turn, againstBot)
-      .then(fetchedDigits =>
-        dispatch(fetchDigitsSuccess(typedDigits, fetchedDigits, turn))
+    try {
+      const fetchedDigits = await fetchDigitsRequest(
+        typedDigits,
+        turn,
+        againstBot
       )
-      .catch(ex => dispatch(fetchDigitsFailure(ex)))
+      dispatch(fetchDigitsSuccess(typedDigits, fetchedDigits, turn))
+    } catch (e) {
+      dispatch(fetchDigitsFailure(e))
+    }
   }
 }
 
 export const pressRoundButton = () => {
-  return dispatch => {
-    return dispatch(fetchDigits()).then(() =>
-      dispatch(toggleRoundButtonSpring())
-    )
+  return async dispatch => {
+    await dispatch(fetchDigits())
+    return dispatch(toggleRoundButtonSpring())
   }
 }
