@@ -23,6 +23,7 @@ function isNumeralAllowable(state, numeral, turn) {
           state.reduce((a, b) => (b !== SUB ? a + b : a), 0) + numeral >
             SECRET_LENGTH) ||
         !state.includes(SUB) ||
+        (state[0] === SECRET_LENGTH - 1 && numeral !== 0) ||
         state.reduce((a, b) => a + b, 0) + numeral > SECRET_LENGTH))
   )
 }
