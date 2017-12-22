@@ -1,5 +1,6 @@
-import equals from 'array-equal'
-import shuffle from 'shuffle-array'
+import isEqual from 'lodash.isequal'
+import shuffle from 'lodash.shuffle'
+import sample from 'lodash.sample'
 
 import permutations from '../utils/permutations'
 import scoreCalc from '../utils/scoreCalc'
@@ -20,12 +21,12 @@ export class SimpleBot extends Bot {
   }
 
   pickRandomPermutation(permutations) {
-    return shuffle.pick(permutations)
+    return sample(permutations)
   }
 
   filterChoices(prevChoices, prevGuess, score) {
     return prevChoices.filter(choice => {
-      return equals(scoreCalc(choice, prevGuess), score)
+      return isEqual(scoreCalc(choice, prevGuess), score)
     })
   }
 
