@@ -1,20 +1,14 @@
 import { connect } from 'react-redux'
 
 import RoundButton from '../components/RoundButton'
-import { pressRoundButton } from '../actions/numerals'
-
-const mapStateToProps = ({ roundButtonSpring }) => {
-  return {
-    roundButtonSpring
-  }
-}
+import { turn } from '../actions/numerals'
 
 const mapDispatchToProps = dispatch => {
   return {
     onRoundButtonPress: () => {
-      dispatch(pressRoundButton())
+      dispatch(turn())
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RoundButton)
+export default connect(null, mapDispatchToProps)(RoundButton)

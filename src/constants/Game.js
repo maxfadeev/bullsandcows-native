@@ -7,3 +7,5 @@ export const GUESS_TURN = 'GUESS_TURN'
 export const SCORE_TURN = 'SCORE_TURN'
 export const SUB = '.'
 export const WINDOW_HEIGHT = Dimensions.get('window').height
+export const RELAY_NUMERALS = 'RELAY_NUMERALS'
+export const RELAY_BUTTON = 'RELAY_BUTTON'
