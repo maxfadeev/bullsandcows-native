@@ -1,7 +1,6 @@
 import {
   PRESS_NUMERIC_BUTTON,
   DISCARD_TYPED_DIGIT,
-  TOGGLE_ROUND_BUTTON_SPRING,
   FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
 
@@ -22,12 +21,6 @@ export const discardDigit = (numeral, key) => {
     type: DISCARD_TYPED_DIGIT,
     numeral,
     key
-  }
-}
-
-export const toggleRoundButtonSpring = () => {
-  return {
-    type: TOGGLE_ROUND_BUTTON_SPRING
   }
 }
 
@@ -91,9 +84,8 @@ function fetchDigits() {
   }
 }
 
-export const pressRoundButton = () => {
+export const turn = () => {
   return async dispatch => {
     await dispatch(fetchDigits())
-    return dispatch(toggleRoundButtonSpring())
   }
 }

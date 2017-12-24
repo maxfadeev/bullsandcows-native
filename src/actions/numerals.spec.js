@@ -32,14 +32,7 @@ describe('numerals actions', () => {
     expect(actions.discardDigit(numeral, key)).toEqual(expectedAction)
   })
 
-  it('should create an action to toggle round button spring', () => {
-    const expectedAction = {
-      type: types.TOGGLE_ROUND_BUTTON_SPRING
-    }
-    expect(actions.toggleRoundButtonSpring()).toEqual(expectedAction)
-  })
-
-  describe('async pressRoundButton action', () => {
+  describe('async turn action', () => {
     it('creates FETCH_DIGITS_SUCCESS when "fetching" digits from the bot', () => {
       const typedDigits = [1, 2, 3, 4]
       const fetchedDigits = simpleBot.lastGuess
@@ -51,11 +44,10 @@ describe('numerals actions', () => {
       })
 
       const expectedActions = [
-        { type: types.FETCH_DIGITS_SUCCESS, typedDigits, fetchedDigits, turn },
-        { type: types.TOGGLE_ROUND_BUTTON_SPRING }
+        { type: types.FETCH_DIGITS_SUCCESS, typedDigits, fetchedDigits, turn }
       ]
 
-      store.dispatch(actions.pressRoundButton()).then(() => {
+      store.dispatch(actions.turn()).then(() => {
         expect(store.getActions()).toEqual(expectedActions)
       })
     })

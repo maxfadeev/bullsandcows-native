@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FlatList, StyleSheet, View, Animated, Dimensions } from 'react-native'
 
 import NumericButton from './NumericButton'
-import { WINDOW_HEIGHT } from '../constants/Game'
+import { WINDOW_HEIGHT, RELAY_NUMERALS } from '../constants/Game'
 
 export default class NumericButtonsList extends Component {
   constructor() {
@@ -13,9 +13,9 @@ export default class NumericButtonsList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
+    if (nextProps.relay !== this.props.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.roundButtonSpring === true ? WINDOW_HEIGHT / 3 : 30,
+        toValue: nextProps.relay !== RELAY_NUMERALS ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true

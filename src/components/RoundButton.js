@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 import RoundButtonSpinner from './RoundButtonSpinner'
-import { WINDOW_HEIGHT } from '../constants/Game'
+import { WINDOW_HEIGHT, RELAY_BUTTON } from '../constants/Game'
 
 export default class RoundButton extends Component {
   constructor(props) {
@@ -23,14 +23,14 @@ export default class RoundButton extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.roundButtonSpring !== this.props.roundButtonSpring) {
+    if (nextProps.relay !== this.props.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.roundButtonSpring === false ? WINDOW_HEIGHT / 3 : 30,
+        toValue: nextProps.relay !== RELAY_BUTTON ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
       }).start(() => {
-        if (nextProps.roundButtonSpring === false) {
+        if (nextProps.relay !== RELAY_BUTTON) {
           this.setState({ isLoading: false })
         }
       })
@@ -66,6 +66,7 @@ export default class RoundButton extends Component {
       disableRoundButton,
       toggleTypedDigitsLock,
       onRoundButtonPress,
+      toggleRelay,
       isDisabled
     } = this.props
 
@@ -76,6 +77,7 @@ export default class RoundButton extends Component {
       disableRoundButton()
       this.pressDown(() => {
         onRoundButtonPress()
+        toggleRelay()
       })
     }
   }
