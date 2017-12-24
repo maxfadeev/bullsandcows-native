@@ -11,7 +11,7 @@ const mapStateToProps = ({ turn }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onNumericButtonPress: (numeral, turn) => {
+    onTypeDigit: (numeral, turn) => {
       dispatch(typeDigit(numeral, turn))
     }
   }
