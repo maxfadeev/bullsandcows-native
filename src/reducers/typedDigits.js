@@ -1,5 +1,5 @@
 import {
-  PRESS_NUMERIC_BUTTON,
+  TYPE_DIGIT,
   DISCARD_TYPED_DIGIT,
   FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
@@ -30,7 +30,7 @@ function isNumeralAllowable(state, numeral, turn) {
 
 const typedDigits = (state = Array(SECRET_LENGTH).fill(SUB), action) => {
   switch (action.type) {
-    case PRESS_NUMERIC_BUTTON:
+    case TYPE_DIGIT:
       if (isNumeralAllowable(state, action.numeral, action.turn)) {
         let isEnought = false
         return state.map(numeral => {
