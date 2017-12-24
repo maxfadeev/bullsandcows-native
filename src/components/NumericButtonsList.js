@@ -24,7 +24,7 @@ export default class NumericButtonsList extends Component {
   }
 
   render() {
-    const { numerals, turn, onNumericButtonPress } = this.props
+    const { numerals, turn, onTypeDigit } = this.props
     return (
       <Animated.View
         style={[
@@ -37,9 +37,7 @@ export default class NumericButtonsList extends Component {
           numColumns={5}
           data={numerals.map((n, i) => ({ key: i, numeral: n }))}
           renderItem={({ item }) => (
-            <NumericButton
-              onPress={() => onNumericButtonPress(item.numeral, turn)}
-            >
+            <NumericButton onPress={() => onTypeDigit(item.numeral, turn)}>
               {item.numeral}
             </NumericButton>
           )}
