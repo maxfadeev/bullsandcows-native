@@ -14,11 +14,11 @@ describe('numerals actions', () => {
     const numeral = 3
     const turn = GUESS_TURN
     const expectedAction = {
-      type: types.PRESS_NUMERIC_BUTTON,
+      type: types.TYPE_DIGIT,
       numeral,
       turn
     }
-    expect(actions.pressNumericButton(numeral, turn)).toEqual(expectedAction)
+    expect(actions.typeDigit(numeral, turn)).toEqual(expectedAction)
   })
 
   it('should create an action to discard a digit', () => {

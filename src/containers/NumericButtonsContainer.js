@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import NumericButtonsList from '../components/NumericButtonsList'
-import { pressNumericButton } from '../actions/numerals'
+import { typeDigit } from '../actions/numerals'
 
 const mapStateToProps = ({ turn }) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = ({ turn }) => {
 const mapDispatchToProps = dispatch => {
   return {
     onNumericButtonPress: (numeral, turn) => {
-      dispatch(pressNumericButton(numeral, turn))
+      dispatch(typeDigit(numeral, turn))
     }
   }
 }

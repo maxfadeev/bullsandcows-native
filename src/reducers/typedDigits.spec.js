@@ -15,14 +15,14 @@ describe('typedDigits reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
 
-  describe('handle PRESS_NUMERIC_BUTTON on the guess turn', () => {
+  describe('handle TYPE_DIGIT on the guess turn', () => {
     const turn = GUESS_TURN
 
     it('should add the numeral', () => {
       const numeral = 7
       expect(
         reducer(initialState, {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -33,7 +33,7 @@ describe('typedDigits reducer', () => {
       const numeral = 0
       expect(
         reducer(initialState, {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -44,7 +44,7 @@ describe('typedDigits reducer', () => {
       const numeral = 7
       expect(
         reducer([numeral, SUB, SUB, SUB], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -55,7 +55,7 @@ describe('typedDigits reducer', () => {
       const numeral = 7
       expect(
         reducer([1, 2, 3, 4], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -63,14 +63,14 @@ describe('typedDigits reducer', () => {
     })
   })
 
-  describe('handle PRESS_NUMERIC_BUTTON on the score turn', () => {
+  describe('handle TYPE_DIGIT on the score turn', () => {
     const turn = SCORE_TURN
 
     it(`should add the numeral if it is less than or equal ${SECRET_LENGTH}`, () => {
       const numeral = 3
       expect(
         reducer([SUB, SUB], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -81,7 +81,7 @@ describe('typedDigits reducer', () => {
       const numeral = 8
       expect(
         reducer([SUB, SUB], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -92,7 +92,7 @@ describe('typedDigits reducer', () => {
       const numeral = 3
       expect(
         reducer([2, SUB], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -103,7 +103,7 @@ describe('typedDigits reducer', () => {
       const numeral = 1
       expect(
         reducer([1, 2], {
-          type: types.PRESS_NUMERIC_BUTTON,
+          type: types.TYPE_DIGIT,
           numeral,
           turn
         })

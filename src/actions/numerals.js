@@ -1,5 +1,5 @@
 import {
-  PRESS_NUMERIC_BUTTON,
+  TYPE_DIGIT,
   DISCARD_TYPED_DIGIT,
   FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
@@ -8,9 +8,9 @@ import { GUESS_TURN, SCORE_TURN } from '../constants/Game'
 
 import simpleBot from '../bot'
 
-export const pressNumericButton = (numeral, turn) => {
+export const typeDigit = (numeral, turn) => {
   return {
-    type: PRESS_NUMERIC_BUTTON,
+    type: TYPE_DIGIT,
     numeral,
     turn
   }
