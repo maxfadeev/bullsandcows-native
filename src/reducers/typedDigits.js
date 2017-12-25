@@ -1,13 +1,12 @@
 import {
-  PRESS_NUMERIC_BUTTON,
-  REMOVE_TYPED_DIGIT,
-  ADD_GUESS,
-  ADD_SCORE
+  TYPE_DIGIT,
+  DISCARD_TYPED_DIGIT,
+  FETCH_DIGITS_SUCCESS
 } from '../constants/ActionTypes'
 import {
   GUESS_TURN,
   SCORE_TURN,
-  GUESS_LENGTH,
+  SECRET_LENGTH,
   SCORE_LENGTH,
   SUB
 } from '../constants/Game'
@@ -19,18 +18,19 @@ function isNumeralAllowable(state, numeral, turn) {
         state.includes(numeral) ||
         !state.includes(SUB))) ||
     (turn === SCORE_TURN &&
-      (numeral > GUESS_LENGTH ||
+      (numeral > SECRET_LENGTH ||
         (state.includes(SUB) &&
           state.reduce((a, b) => (b !== SUB ? a + b : a), 0) + numeral >
-            GUESS_LENGTH) ||
+            SECRET_LENGTH) ||
         !state.includes(SUB) ||
-        state.reduce((a, b) => a + b, 0) + numeral > GUESS_LENGTH))
+        (state[0] === SECRET_LENGTH - 1 && numeral !== 0) ||
+        state.reduce((a, b) => a + b, 0) + numeral > SECRET_LENGTH))
   )
 }
 
-const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
+const typedDigits = (state = Array(SECRET_LENGTH).fill(SUB), action) => {
   switch (action.type) {
-    case PRESS_NUMERIC_BUTTON:
+    case TYPE_DIGIT:
       if (isNumeralAllowable(state, action.numeral, action.turn)) {
         let isEnought = false
         return state.map(numeral => {
@@ -42,13 +42,20 @@ const typedDigits = (state = Array(GUESS_LENGTH).fill(SUB), action) => {
         })
       }
       return state
-    case REMOVE_TYPED_DIGIT:
+    case DISCARD_TYPED_DIGIT:
       return state.map((numeral, key) => {
         if (key === action.key) {
           return SUB
         }
         return numeral
       })
+    case FETCH_DIGITS_SUCCESS:
+      if (action.turn === GUESS_TURN) {
+        return Array(SCORE_LENGTH).fill(SUB)
+      }
+      if (action.turn === SCORE_TURN) {
+        return Array(SECRET_LENGTH).fill(SUB)
+      }
     default:
       return state
   }

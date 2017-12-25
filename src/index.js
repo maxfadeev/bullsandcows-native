@@ -1,6 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import Expo, { Font } from 'expo'
 import { View } from 'react-native'
 
@@ -26,7 +27,7 @@ export default class Main extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         {this.state.fontLoaded ? (
-          <Provider store={createStore(reducer)}>
+          <Provider store={createStore(reducer, applyMiddleware(thunk))}>
             <Game />
           </Provider>
         ) : null}

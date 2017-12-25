@@ -1,59 +1,51 @@
-import React from 'react'
-import {
-  FlatList,
-  StyleSheet,
-  UIManager,
-  LayoutAnimation,
-  View,
-  Platform,
-  NativeModules
-} from 'react-native'
+import React, { Component } from 'react'
+import { FlatList, StyleSheet, View, Animated, Dimensions } from 'react-native'
 
 import NumericButton from './NumericButton'
+import { WINDOW_HEIGHT, RELAY_NUMERALS } from '../constants/Game'
 
-export default class NumericButtonsList extends React.Component {
+export default class NumericButtonsList extends Component {
   constructor() {
     super()
     this.state = {
-      top: minTopPosition
-    }
-
-    if (Platform.OS === 'android') {
-      NativeModules.UIManager.setLayoutAnimationEnabledExperimental &&
-        NativeModules.UIManager.setLayoutAnimationEnabledExperimental(true)
+      translateY: new Animated.Value(20)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    LayoutAnimation.spring()
-    if (nextProps.numericButtonsVisibility === false) {
-      this.setState({ top: 200 })
-    } else {
-      this.setState({ top: minTopPosition })
+    if (nextProps.relay !== this.props.relay) {
+      Animated.spring(this.state.translateY, {
+        toValue: nextProps.relay !== RELAY_NUMERALS ? WINDOW_HEIGHT / 3 : 30,
+        speed: 25,
+        bounciness: 15,
+        useNativeDriver: true
+      }).start()
     }
   }
 
   render() {
-    const { numerals, turn, onNumericButtonPress } = this.props
+    const { numerals, turn, onTypeDigit } = this.props
     return (
-      <View style={[styles.view, { top: this.state.top }]}>
+      <Animated.View
+        style={[
+          styles.view,
+          { transform: [{ translateY: this.state.translateY }] }
+        ]}
+      >
         <FlatList
           style={styles.flatList}
           numColumns={5}
           data={numerals.map((n, i) => ({ key: i, numeral: n }))}
           renderItem={({ item }) => (
-            <NumericButton
-              onPress={() => onNumericButtonPress(item.numeral, turn)}
-            >
+            <NumericButton onPress={() => onTypeDigit(item.numeral, turn)}>
               {item.numeral}
             </NumericButton>
           )}
         />
-      </View>
+      </Animated.View>
     )
   }
 }
-const minTopPosition = 15
 
 const styles = StyleSheet.create({
   flatList: {
@@ -61,10 +53,7 @@ const styles = StyleSheet.create({
   },
   view: {
     position: 'absolute',
-    top: minTopPosition,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: 300
   }
 })

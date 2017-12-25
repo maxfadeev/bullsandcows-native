@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableWithoutFeedback, Animated, StyleSheet } from 'react-native'
+import { TouchableOpacity, Animated, StyleSheet } from 'react-native'
 
 import { SUB } from '../constants/Game'
 
@@ -9,47 +9,29 @@ export default class TypedDigit extends React.Component {
     this.state = {
       opacity: new Animated.Value(1)
     }
+
+    this.onPress = this.onPress.bind(this)
   }
 
   shouldComponentUpdate(nextProps) {
     return nextProps.children !== this.props.children
   }
 
-  animate() {
-    if (this.props.children !== SUB) {
-      Animated.sequence([
-        Animated.timing(this.state.opacity, {
-          toValue: 0,
-          duration: 200
-        }),
-        Animated.timing(this.state.opacity, {
-          toValue: 1,
-          duration: 50
-        })
-      ]).start()
+  onPress() {
+    const { isLocked, disableRoundButton, onDiscard } = this.props
+    if (!isLocked) {
+      disableRoundButton()
+      onDiscard()
     }
   }
 
   render() {
     return (
-      <TouchableWithoutFeedback
-        style={{ flex: 1 }}
-        onPress={() => {
-          this.animate()
-          setTimeout(() => {
-            this.props.onPress()
-          }, 200)
-        }}
-      >
-        <Animated.Text
-          style={StyleSheet.flatten([
-            styles.text,
-            { opacity: this.state.opacity }
-          ])}
-        >
+      <TouchableOpacity style={{ flex: 1 }} onPress={this.onPress}>
+        <Animated.Text style={[styles.text, { opacity: this.state.opacity }]}>
           {this.props.children}
         </Animated.Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     )
   }
 }

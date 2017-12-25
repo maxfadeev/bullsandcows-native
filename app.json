@@ -1,5 +1,8 @@
 {
   "expo": {
-    "sdkVersion": "22.0.0"
+    "sdkVersion": "24.0.0",
+    "orientation": "portrait",
+    "slug": "bullsandcows-native",
+    "name": "bullsandcows-native"
   }
 }
