@@ -1,9 +1,5 @@
 function zip(arrays) {
-  return arrays[0].map(function(_, i) {
-    return arrays.map(function(array) {
-      return array[i]
-    })
-  })
+  return arrays[0].map((_, i) => arrays.map(array => array[i]))
 }
 
 const scoreCalc = (guess, secret) => {
