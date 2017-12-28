@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Animated, Platform } from 'react-native'
+import { View, StyleSheet, Animated, Platform } from 'react-native'
 
 export default class RoundButtonSpinner extends Component {
   constructor(props) {

@@ -4,8 +4,7 @@ import {
   Animated,
   StyleSheet,
   Text,
-  View,
-  Dimensions
+  View
 } from 'react-native'
 
 import RoundButtonSpinner from './RoundButtonSpinner'

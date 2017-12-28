@@ -1,8 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, Animated, StyleSheet } from 'react-native'
 
-import { SUB } from '../constants/Game'
-
 export default class TypedDigit extends React.Component {
   constructor(props) {
     super(props)
