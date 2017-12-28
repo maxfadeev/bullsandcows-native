@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { TouchableOpacity, Animated, StyleSheet } from 'react-native'
 
-export default class TypedDigit extends React.Component {
+export default class TypedDigit extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -9,10 +9,6 @@ export default class TypedDigit extends React.Component {
     }
 
     this.onPress = this.onPress.bind(this)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return nextProps.children !== this.props.children
   }
 
   onPress() {
