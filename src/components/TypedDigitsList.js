@@ -1,7 +1,8 @@
 import React from 'react'
-import { FlatList, View, StyleSheet, Platform } from 'react-native'
+import { FlatList, View, StyleSheet } from 'react-native'
 
 import TypedDigit from './TypedDigit'
+import ScoreDigitIcon from './ScoreDigitIcon'
 
 import { SCORE_TURN } from '../constants/Game'
 
@@ -18,19 +19,7 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
         >
           {item.digit}
         </TypedDigit>
-        {turn === SCORE_TURN && (
-          <View style={{ flex: 1, alignItems: 'center' }}>
-            <View
-              style={
-                turn === SCORE_TURN
-                  ? item.key === 0
-                    ? [styles.icon, styles.green]
-                    : [styles.icon, styles.orange]
-                  : {}
-              }
-            />
-          </View>
-        )}
+        {turn === SCORE_TURN && <ScoreDigitIcon item={item} />}
       </View>
     )}
   />
@@ -45,18 +34,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
-  },
-  icon: {
-    width: 12,
-    height: 12,
-    borderRadius: 12,
-    marginTop: Platform.OS === 'android' ? 10 : 0
-  },
-  green: {
-    backgroundColor: 'green'
-  },
-  orange: {
-    backgroundColor: 'orange'
   }
 })
 
