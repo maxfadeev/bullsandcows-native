@@ -34,8 +34,6 @@ export default class NumericButton extends Component {
   }
 
   render() {
-    let { zoom } = this.state
-
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
         <Animated.Text
