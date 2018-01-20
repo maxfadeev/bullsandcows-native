@@ -19,7 +19,7 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
         >
           {item.digit}
         </TypedDigit>
-        {turn === SCORE_TURN && <ScoreDigitIcon item={item} />}
+        {turn === SCORE_TURN && <ScoreDigitIcon index={item.key} />}
       </View>
     )}
   />

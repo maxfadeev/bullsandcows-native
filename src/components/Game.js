@@ -4,6 +4,7 @@ import { View } from 'react-native'
 import NumericButtonsContainer from '../containers/NumericButtonsContainer'
 import TypedDigitsContainer from '../containers/TypedDigitsContainer'
 import RoundButtonContainer from '../containers/RoundButtonContainer'
+import ResultsTableContainer from '../containers/ResultsTableContainer'
 
 import { RELAY_NUMERALS, RELAY_BUTTON } from '../constants/Game'
 
@@ -50,7 +51,10 @@ export default class Game extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
-        <View style={{ flex: 6 }} />
+        <View style={{ flex: 1 }} />
+        <View style={{ flex: 6 }}>
+          <ResultsTableContainer />
+        </View>
         <View style={{ flex: 1 }}>
           <TypedDigitsContainer
             {...this.handleRoundButton}
