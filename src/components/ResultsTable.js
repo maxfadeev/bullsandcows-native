@@ -1,5 +1,12 @@
 import React from 'react'
-import { View, FlatList, Text, StyleSheet, ScrollView } from 'react-native'
+import {
+  View,
+  FlatList,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Platform
+} from 'react-native'
 
 import ScoreDigitIcon from './ScoreDigitIcon'
 
@@ -54,11 +61,14 @@ const ResultsTable = ({ guesses, scores }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
     flexDirection: 'row'
   },
   item: {
     width: 95,
-    height: 34
+    height: Platform.OS === 'android' ? 38 : 34,
+    flex: 1,
+    paddingBottom: Platform.OS === 'android' ? 5 : 0
   },
   text: {
     fontFamily: 'VollkornSC-Bold',
