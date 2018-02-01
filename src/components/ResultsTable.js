@@ -10,6 +10,7 @@ function isEven(n) {
 const ResultsTable = ({ guesses, scores }) => (
   <View style={styles.container}>
     <FlatList
+      scrollEnabled={false}
       data={guesses.map((v, i) => ({ key: i, guess: v }))}
       renderItem={({ item }) => (
         <View
@@ -23,6 +24,7 @@ const ResultsTable = ({ guesses, scores }) => (
       )}
     />
     <FlatList
+      scrollEnabled={false}
       data={scores.map((v, i) => ({ key: i, score: v }))}
       renderItem={({ item }) => (
         <View

@@ -8,6 +8,7 @@ import { SCORE_TURN } from '../constants/Game'
 
 const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
   <FlatList
+    scrollEnabled={false}
     style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}

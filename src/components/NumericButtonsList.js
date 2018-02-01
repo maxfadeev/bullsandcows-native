@@ -33,6 +33,7 @@ export default class NumericButtonsList extends Component {
         ]}
       >
         <FlatList
+          scrollEnabled={false}
           style={styles.flatList}
           numColumns={5}
           data={numerals.map((n, i) => ({ key: i, numeral: n }))}
