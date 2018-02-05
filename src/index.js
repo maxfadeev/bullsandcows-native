@@ -9,19 +9,7 @@ import { StackNavigator } from 'react-navigation'
 import reducer from './reducers'
 
 import Game from './components/Game'
-
-class HomeScreen extends Component {
-  render() {
-    return (
-      <View>
-        <Button
-          title="Play"
-          onPress={() => this.props.navigation.navigate('Game')}
-        />
-      </View>
-    )
-  }
-}
+import Home from './components/Home'
 
 class GameScreen extends Component {
   state = {
@@ -53,7 +41,7 @@ class GameScreen extends Component {
 const RootStack = StackNavigator(
   {
     Home: {
-      screen: HomeScreen
+      screen: Home
     },
     Game: {
       screen: GameScreen
