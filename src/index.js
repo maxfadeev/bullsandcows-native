@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import Expo, { Font } from 'expo'
-import { View } from 'react-native'
+import { View, Button } from 'react-native'
+import { StackNavigator } from 'react-navigation'
 
 import reducer from './reducers'
 
 import Game from './components/Game'
 
-export default class Main extends React.Component {
+class HomeScreen extends Component {
+  render() {
+    return (
+      <View>
+        <Button
+          title="Play"
+          onPress={() => this.props.navigation.navigate('Game')}
+        />
+      </View>
+    )
+  }
+}
+
+class GameScreen extends Component {
   state = {
     fontLoaded: false
   }
@@ -36,4 +50,27 @@ export default class Main extends React.Component {
   }
 }
 
-Expo.registerRootComponent(Main)
+const RootStack = StackNavigator(
+  {
+    Home: {
+      screen: HomeScreen
+    },
+    Game: {
+      screen: GameScreen
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    cardStyle: {
+      backgroundColor: 'white'
+    }
+  }
+)
+
+export default class App extends React.Component {
+  render() {
+    return <RootStack />
+  }
+}
+
+Expo.registerRootComponent(RootStack)
