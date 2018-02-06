@@ -9,12 +9,6 @@ const mapStateToProps = ({ turn }) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onTypeDigit: (numeral, turn) => {
-      dispatch(typeDigit(numeral, turn))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(NumericButtonsList)
+export default connect(mapStateToProps, {
+  onTypeDigit: typeDigit
+})(NumericButtonsList)
