@@ -28,11 +28,11 @@ class GameScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {this.state.fontLoaded ? (
+        {this.state.fontLoaded && (
           <Provider store={createStore(reducer, applyMiddleware(thunk))}>
             <Game />
           </Provider>
-        ) : null}
+        )}
       </View>
     )
   }
@@ -51,7 +51,8 @@ const RootStack = StackNavigator(
     initialRouteName: 'Home',
     cardStyle: {
       backgroundColor: 'white'
-    }
+    },
+    headerMode: 'none'
   }
 )
 
