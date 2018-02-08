@@ -60,6 +60,7 @@ export default class Game extends React.Component {
   }
 
   render() {
+    const { navigation } = this.props
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
         <MenuButton toggleModalMenu={this.toggleModalMenu} />
@@ -92,6 +93,7 @@ export default class Game extends React.Component {
         <ModalMenu
           isVisible={this.state.isModalMenuVisible}
           toggleModalMenu={this.toggleModalMenu}
+          navigation={navigation}
         />
       </View>
     )

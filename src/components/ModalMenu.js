@@ -25,6 +25,7 @@ export default class ModalMenu extends Component {
   }
 
   render() {
+    const { navigation, toggleModalMenu } = this.props
     return (
       <View
         style={[
@@ -32,10 +33,15 @@ export default class ModalMenu extends Component {
           { display: this.state.isVisible ? 'flex' : 'none' }
         ]}
       >
-        <TouchableOpacity onPress={() => this.props.toggleModalMenu()}>
+        <TouchableOpacity onPress={() => toggleModalMenu()}>
           <Text style={styles.menuFont}>Resume</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Home')
+            toggleModalMenu()
+          }}
+        >
           <Text style={styles.menuFont}>Quit</Text>
         </TouchableOpacity>
       </View>
