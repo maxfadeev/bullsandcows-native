@@ -6,6 +6,9 @@ import TypedDigitsContainer from '../containers/TypedDigitsContainer'
 import RoundButtonContainer from '../containers/RoundButtonContainer'
 import ResultsTableContainer from '../containers/ResultsTableContainer'
 
+import ModalMenu from './ModalMenu'
+import MenuButton from './MenuButton'
+
 import { RELAY_NUMERALS, RELAY_BUTTON } from '../constants/Game'
 
 export default class Game extends React.Component {
@@ -14,6 +17,7 @@ export default class Game extends React.Component {
     this.state = {
       isRoundButtonDisabled: false,
       isTypedDigitsLocked: false,
+      isModalMenuVisible: false,
       relay: RELAY_NUMERALS
     }
     this.handleRoundButton = {
@@ -22,6 +26,7 @@ export default class Game extends React.Component {
     }
     this.toggleTypedDigitsLock = this.toggleTypedDigitsLock.bind(this)
     this.toggleRelay = this.toggleRelay.bind(this)
+    this.toggleModalMenu = this.toggleModalMenu.bind(this)
   }
 
   enableRoundButton() {
@@ -48,9 +53,16 @@ export default class Game extends React.Component {
     }))
   }
 
+  toggleModalMenu() {
+    this.setState(state => ({
+      isModalMenuVisible: !state.isModalMenuVisible
+    }))
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
+        <MenuButton toggleModalMenu={this.toggleModalMenu} />
         <View style={{ flex: 1 }} />
         <View style={{ flex: 6 }}>
           <ResultsTableContainer />
@@ -77,6 +89,10 @@ export default class Game extends React.Component {
             relay={this.state.relay}
           />
         </View>
+        <ModalMenu
+          isVisible={this.state.isModalMenuVisible}
+          toggleModalMenu={this.toggleModalMenu}
+        />
       </View>
     )
   }

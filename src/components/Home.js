@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View, Button, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 const Home = ({ navigation }) => (
   <View style={styles.container}>
-    <Button title="Play" onPress={() => navigation.navigate('Game')} />
+    <TouchableOpacity onPress={() => navigation.navigate('Game')}>
+      <Text style={styles.menuFont}>Play</Text>
+    </TouchableOpacity>
   </View>
 )
 
@@ -12,6 +14,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  menuFont: {
+    fontSize: 19
   }
 })
 

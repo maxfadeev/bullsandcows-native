@@ -4,10 +4,11 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import Expo, { Font } from 'expo'
 import { View, Button } from 'react-native'
-import { StackNavigator } from 'react-navigation'
+import { TabNavigator } from 'react-navigation'
 
 import reducer from './reducers'
 
+import ModalMenu from './components/ModalMenu'
 import Game from './components/Game'
 import Home from './components/Home'
 
@@ -38,7 +39,7 @@ class GameScreen extends Component {
   }
 }
 
-const RootStack = StackNavigator(
+const RootStack = TabNavigator(
   {
     Home: {
       screen: Home
@@ -52,7 +53,7 @@ const RootStack = StackNavigator(
     cardStyle: {
       backgroundColor: 'white'
     },
-    headerMode: 'none'
+    tabBarComponent: () => <View />
   }
 )
 
