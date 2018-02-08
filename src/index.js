@@ -40,7 +40,7 @@ class GameScreen extends Component {
   render() {
     return (
       <Provider store={createStore(reducer, applyMiddleware(thunk))}>
-        <Game />
+        <Game {...this.props} />
       </Provider>
     )
   }
