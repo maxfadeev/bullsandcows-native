@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   menuFont: {
+    fontFamily: 'VollkornSC-Bold',
     fontSize: 19
   }
 })
