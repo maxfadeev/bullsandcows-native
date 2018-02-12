@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity
-} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native'
 
 export default class ModalMenu extends Component {
   constructor(props) {
@@ -27,46 +21,44 @@ export default class ModalMenu extends Component {
   render() {
     const { navigation, toggleModalMenu } = this.props
     return (
-      <View
-        style={[
-          styles.container,
-          { display: this.state.isVisible ? 'flex' : 'none' }
-        ]}
-      >
-        <TouchableOpacity onPress={() => toggleModalMenu()}>
-          <Text style={styles.menuFont}>Resume</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Home')
-            toggleModalMenu()
-          }}
+      <View style={styles.container}>
+        <Modal
+          visible={this.state.isVisible}
+          animationType="fade"
+          onRequestClose={() => toggleModalMenu()}
         >
-          <Text style={styles.menuFont}>Quit</Text>
-        </TouchableOpacity>
+          <View style={styles.modalContainer}>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity onPress={() => toggleModalMenu()}>
+                <Text style={styles.menuFont}>Resume</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('Home')
+                  toggleModalMenu()
+                }}
+              >
+                <Text style={styles.menuFont}>Quit</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </View>
     )
   }
 }
 
-const modalWidth = 200
-const modalHeight = 200
-
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    backgroundColor: '#efefef',
-    top: Dimensions.get('window').height / 2 - modalHeight / 2,
-    width: modalWidth,
-    height: modalHeight,
-    shadowColor: 'grey',
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    borderLeftWidth: 11,
-    borderColor: '#d2691e'
+    flex: 1,
+    justifyContent: 'center'
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  innerContainer: {
+    alignItems: 'center'
   },
   menuFont: {
     fontFamily: 'VollkornSC-Regular',
