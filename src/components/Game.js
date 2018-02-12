@@ -66,7 +66,7 @@ export default class Game extends React.Component {
         <View style={{ flex: 1 }}>
           <MenuButton toggleModalMenu={this.toggleModalMenu} />
         </View>
-        <View style={{ flex: 6 }}>
+        <View style={{ flex: 7 }}>
           <ResultsTableContainer />
         </View>
         <View style={{ flex: 1 }}>
