@@ -82,6 +82,9 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   scoreContainer: {
+    borderLeftWidth: 1,
+    borderColor: 'white',
+    paddingLeft: 6,
     flexDirection: 'row'
   },
   score: {
