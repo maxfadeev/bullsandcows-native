@@ -5,7 +5,10 @@ export default class MenuButton extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.toggleModalMenu()}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.props.toggleModalMenu()}
+        >
           <Image source={require('../assets/icons/menu.png')} />
         </TouchableOpacity>
       </View>
@@ -19,5 +22,8 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingTop: 5,
     borderTopWidth: 1
+  },
+  button: {
+    flex: 1
   }
 })
