@@ -63,8 +63,9 @@ export default class Game extends React.Component {
     const { navigation } = this.props
     return (
       <View style={{ flex: 1 }}>
-        <MenuButton toggleModalMenu={this.toggleModalMenu} />
-        <View style={{ flex: 1 }} />
+        <View style={{ flex: 1 }}>
+          <MenuButton toggleModalMenu={this.toggleModalMenu} />
+        </View>
         <View style={{ flex: 6 }}>
           <ResultsTableContainer />
         </View>
