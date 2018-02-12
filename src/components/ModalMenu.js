@@ -49,7 +49,7 @@ export default class ModalMenu extends Component {
   }
 }
 
-const modalWidth = 150
+const modalWidth = 200
 const modalHeight = 200
 
 const styles = StyleSheet.create({
@@ -65,12 +65,11 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 1,
-    borderTopWidth: 12,
-    borderBottomWidth: 2,
+    borderLeftWidth: 11,
     borderColor: '#d2691e'
   },
   menuFont: {
-    fontFamily: 'VollkornSC-Bold',
+    fontFamily: 'VollkornSC-Regular',
     fontSize: 18,
     marginBottom: 10
   }
