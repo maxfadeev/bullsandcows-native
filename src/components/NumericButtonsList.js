@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, StyleSheet, Animated } from 'react-native'
+import { FlatList, StyleSheet, Animated, View } from 'react-native'
 
 import NumericButton from './NumericButton'
 import { WINDOW_HEIGHT, RELAY_NUMERALS } from '../constants/Game'
@@ -28,7 +28,7 @@ export default class NumericButtonsList extends Component {
     return (
       <Animated.View
         style={[
-          styles.view,
+          styles.container,
           { transform: [{ translateY: this.state.translateY }] }
         ]}
       >
@@ -50,11 +50,13 @@ export default class NumericButtonsList extends Component {
 
 const styles = StyleSheet.create({
   flatList: {
-    width: 250
-  },
-  view: {
+    width: 250,
+    height: 140,
     position: 'absolute',
-    alignItems: 'center',
-    width: 300
+    top: 0
+  },
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

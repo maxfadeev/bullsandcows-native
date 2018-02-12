@@ -62,7 +62,7 @@ export default class Game extends React.Component {
   render() {
     const { navigation } = this.props
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <View style={{ flex: 1 }}>
         <MenuButton toggleModalMenu={this.toggleModalMenu} />
         <View style={{ flex: 1 }} />
         <View style={{ flex: 6 }}>
@@ -77,7 +77,7 @@ export default class Game extends React.Component {
             relay={this.state.relay}
           />
         </View>
-        <View style={{ flex: 3, width: 300 }}>
+        <View style={{ flex: 3 }}>
           <NumericButtonsContainer
             numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
             relay={this.state.relay}

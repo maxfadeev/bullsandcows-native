@@ -20,54 +20,60 @@ const ResultsTable = ({ guesses, scores }) => {
     scoresItems.push([])
   }
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <FlatList
-        scrollEnabled={false}
-        data={guesses.map((v, i) => ({ key: i, guess: v }))}
-        renderItem={({ item }) => (
-          <View
-            style={[
-              styles.item,
-              { backgroundColor: isEven(item.key) ? '#efefef' : 'white' }
-            ]}
-          >
-            <Text style={styles.text}>{item.guess}</Text>
-          </View>
-        )}
-      />
-      <FlatList
-        scrollEnabled={false}
-        data={scoresItems.map((v, i) => ({ key: i, score: v }))}
-        renderItem={({ item }) => (
-          <View
-            style={[
-              styles.item,
-              styles.scoreContainer,
-              { backgroundColor: isEven(item.key) ? '#efefef' : 'white' }
-            ]}
-          >
-            {item.score.map((n, k) => (
-              <View key={k} style={styles.score}>
-                <Text style={styles.text}>{n}</Text>
-                <ScoreDigitIcon index={k} />
-              </View>
-            ))}
-          </View>
-        )}
-      />
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <FlatList
+          style={styles.list}
+          scrollEnabled={false}
+          data={guesses.map((v, i) => ({ key: i, guess: v }))}
+          renderItem={({ item }) => (
+            <View
+              style={[
+                styles.item,
+                { backgroundColor: isEven(item.key) ? '#efefef' : 'white' }
+              ]}
+            >
+              <Text style={styles.text}>{item.guess}</Text>
+            </View>
+          )}
+        />
+        <FlatList
+          scrollEnabled={false}
+          data={scoresItems.map((v, i) => ({ key: i, score: v }))}
+          renderItem={({ item }) => (
+            <View
+              style={[
+                styles.item,
+                styles.scoreContainer,
+                { backgroundColor: isEven(item.key) ? '#efefef' : 'white' }
+              ]}
+            >
+              {item.score.map((n, k) => (
+                <View key={k} style={styles.score}>
+                  <Text style={styles.text}>{n}</Text>
+                  <ScoreDigitIcon index={k} />
+                </View>
+              ))}
+            </View>
+          )}
+        />
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  scrollContainer: {
     flexDirection: 'row'
   },
   item: {
     width: 95,
     height: Platform.OS === 'android' ? 38 : 34,
-    flex: 1,
     paddingBottom: Platform.OS === 'android' ? 5 : 0
   },
   text: {
