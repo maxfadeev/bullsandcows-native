@@ -18,12 +18,14 @@ export default class MenuButton extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginTop: 38,
     paddingLeft: 5,
     paddingTop: 5,
     borderTopWidth: 1
   },
   button: {
-    flex: 1
+    width: 28,
+    height: 26
   }
 })
