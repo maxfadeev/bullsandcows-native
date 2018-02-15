@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 
 import RoundButtonSpinner from './RoundButtonSpinner'
-import { WINDOW_HEIGHT, RELAY_BUTTON } from '../constants/Game'
+import { WINDOW_HEIGHT, SWITCHER_CURRENT_BUTTON } from '../constants/Game'
 
 export default class RoundButton extends Component {
   constructor(props) {
@@ -21,22 +21,23 @@ export default class RoundButton extends Component {
     this.onPress = this.onPress.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.relay !== this.props.relay) {
+  componentDidUpdate(nextProps) {
+    if (nextProps.switcher !== this.props.switcher) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.relay !== RELAY_BUTTON ? WINDOW_HEIGHT / 3 : 30,
+        toValue:
+          nextProps.switcher === SWITCHER_CURRENT_BUTTON
+            ? WINDOW_HEIGHT / 3
+            : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
       }).start(() => {
-        if (nextProps.relay !== RELAY_BUTTON) {
+        if (nextProps.switcher === SWITCHER_CURRENT_BUTTON) {
           this.setState({ isLoading: false })
         }
       })
     }
-  }
 
-  componentDidUpdate() {
     if (!this.state.isLoading) {
       this.pressUp()
     }
@@ -63,20 +64,20 @@ export default class RoundButton extends Component {
   onPress() {
     const {
       disableRoundButton,
-      toggleTypedDigitsLock,
+      disableTypedDigits,
       onRoundButtonPress,
-      toggleRelay,
+      toggleSwitcher,
       isDisabled
     } = this.props
 
     if (!isDisabled) {
       this.setState({ isLoading: true })
 
-      toggleTypedDigitsLock()
+      disableTypedDigits()
       disableRoundButton()
       this.pressDown(() => {
         onRoundButtonPress()
-        toggleRelay()
+        toggleSwitcher()
       })
     }
   }

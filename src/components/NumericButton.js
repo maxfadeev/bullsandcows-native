@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
     fontFamily: 'VollkornSC-Bold',
-    flex: 1,
-    alignSelf: 'baseline'
+    flex: 1
   }
 })

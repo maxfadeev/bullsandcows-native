@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import TypedDigitsList from '../components/TypedDigitsList'
 import { discardDigit } from '../actions/numerals'
-import { SUB, RELAY_NUMERALS } from '../constants/Game'
+import { SUB, SWITCHER_CURRENT_NUMERALS } from '../constants/Game'
 
 const mapStateToProps = ({ typedDigits, turn }) => {
   return {
@@ -18,23 +18,26 @@ class TypedDigitsContainer extends React.Component {
     this.onDiscard = this.onDiscard.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.typedDigits.length !== this.props.typedDigits.length) {
-      this.props.toggleTypedDigitsLock()
-    }
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
     const {
       typedDigits,
-      isLocked,
+      isDisabled,
       enableRoundButton,
-      toggleRelay,
-      relay
+      enableTypedDigits,
+      toggleSwitcher,
+      switcher
     } = this.props
-    if (!typedDigits.includes(SUB) && !isLocked && relay === RELAY_NUMERALS) {
+    if (
+      !typedDigits.includes(SUB) &&
+      !isDisabled &&
+      switcher === SWITCHER_CURRENT_NUMERALS
+    ) {
       enableRoundButton()
-      toggleRelay()
+      toggleSwitcher()
+    }
+
+    if (nextProps.typedDigits.length !== typedDigits.length) {
+      enableTypedDigits()
     }
   }
 
@@ -42,12 +45,12 @@ class TypedDigitsContainer extends React.Component {
     const {
       typedDigits,
       disableRoundButton,
-      toggleRelay,
+      toggleSwitcher,
       dispatch
     } = this.props
     if (!typedDigits.includes(SUB)) {
       disableRoundButton()
-      toggleRelay()
+      toggleSwitcher()
     }
     dispatch(discardDigit(numeral, key))
   }

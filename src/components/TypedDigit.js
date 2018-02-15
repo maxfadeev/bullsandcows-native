@@ -12,8 +12,8 @@ export default class TypedDigit extends PureComponent {
   }
 
   onPress() {
-    const { isLocked, disableRoundButton, onDiscard } = this.props
-    if (!isLocked) {
+    const { isDisabled, disableRoundButton, onDiscard } = this.props
+    if (!isDisabled) {
       disableRoundButton()
       onDiscard()
     }
