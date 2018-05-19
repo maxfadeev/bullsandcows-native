@@ -21,22 +21,20 @@ export default class RoundButton extends Component {
     this.onPress = this.onPress.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.relay !== this.props.relay) {
+  componentDidUpdate(prevProps) {
+    if (this.props.relay !== prevProps.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.relay !== RELAY_BUTTON ? WINDOW_HEIGHT / 3 : 30,
+        toValue: this.props.relay !== RELAY_BUTTON ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
       }).start(() => {
-        if (nextProps.relay !== RELAY_BUTTON) {
+        if (this.props.relay !== RELAY_BUTTON) {
           this.setState({ isLoading: false })
         }
       })
     }
-  }
 
-  componentDidUpdate() {
     if (!this.state.isLoading) {
       this.pressUp()
     }

@@ -18,13 +18,7 @@ class TypedDigitsContainer extends React.Component {
     this.onDiscard = this.onDiscard.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.typedDigits.length !== this.props.typedDigits.length) {
-      this.props.toggleTypedDigitsLock()
-    }
-  }
-
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       typedDigits,
       isLocked,
@@ -35,6 +29,10 @@ class TypedDigitsContainer extends React.Component {
     if (!typedDigits.includes(SUB) && !isLocked && relay === RELAY_NUMERALS) {
       enableRoundButton()
       toggleRelay()
+    }
+
+    if (typedDigits.length !== prevProps.typedDigits.length) {
+      this.props.toggleTypedDigitsLock()
     }
   }
 

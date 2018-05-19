@@ -12,10 +12,10 @@ export default class NumericButtonsList extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.relay !== this.props.relay) {
+  componentDidUpdate(prevProps) {
+    if (this.props.relay !== prevProps.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.relay !== RELAY_NUMERALS ? WINDOW_HEIGHT / 3 : 30,
+        toValue: this.props.relay !== RELAY_NUMERALS ? WINDOW_HEIGHT / 3 : 30,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
