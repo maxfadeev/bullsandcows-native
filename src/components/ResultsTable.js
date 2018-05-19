@@ -24,6 +24,7 @@ const ResultsTable = ({ guesses, scores }) => {
       <FlatList
         scrollEnabled={false}
         data={guesses.map((v, i) => ({ key: i, guess: v }))}
+        keyExtractor={(guess, index) => index.toString()}
         renderItem={({ item }) => (
           <View
             style={[
@@ -38,6 +39,7 @@ const ResultsTable = ({ guesses, scores }) => {
       <FlatList
         scrollEnabled={false}
         data={scoresItems.map((v, i) => ({ key: i, score: v }))}
+        keyExtractor={(score, index) => index.toString()}
         renderItem={({ item }) => (
           <View
             style={[
