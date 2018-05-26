@@ -7,30 +7,21 @@ import ScoreDigitIcon from './ScoreDigitIcon'
 import { SCORE_TURN } from '../constants/Game'
 
 const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
-  <FlatList
-    contentContainerStyle={styles.container}
-    scrollEnabled={false}
-    numColumns={4}
-    data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
-    renderItem={({ item }) => (
-      <View style={styles.digitContainer}>
-        <TypedDigit
-          onDiscard={() => onDiscardDigit(item.digit, item.key)}
-          {...props}
-        >
-          {item.digit}
+  <View style={styles.container}>
+    {typedDigits.map((digit, index) => (
+      <React.Fragment key={index}>
+        <TypedDigit onDiscard={() => onDiscardDigit(digit, index)} {...props}>
+          {digit}
         </TypedDigit>
-        {turn === SCORE_TURN && <ScoreDigitIcon index={item.key} />}
-      </View>
-    )}
-  />
+        {turn === SCORE_TURN && <ScoreDigitIcon index={index} />}
+      </React.Fragment>
+    ))}
+  </View>
 )
 
 const styles = StyleSheet.create({
   container: {
-    height: 180
-  },
-  digitContainer: {
+    height: 180,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
