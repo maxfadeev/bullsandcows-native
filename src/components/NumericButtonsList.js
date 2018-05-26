@@ -4,18 +4,20 @@ import { FlatList, StyleSheet, Animated } from 'react-native'
 import NumericButton from './NumericButton'
 import { WINDOW_HEIGHT, RELAY_NUMERALS } from '../constants/Game'
 
+const HEIGHT = 190
+
 export default class NumericButtonsList extends Component {
   constructor() {
     super()
     this.state = {
-      translateY: new Animated.Value(20)
+      translateY: new Animated.Value(0)
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.relay !== prevProps.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: this.props.relay !== RELAY_NUMERALS ? WINDOW_HEIGHT / 3 : 30,
+        toValue: this.props.relay !== RELAY_NUMERALS ? HEIGHT : 0,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
@@ -28,7 +30,7 @@ export default class NumericButtonsList extends Component {
     return (
       <Animated.View
         style={[
-          styles.view,
+          styles.container,
           { transform: [{ translateY: this.state.translateY }] }
         ]}
       >
@@ -52,9 +54,7 @@ const styles = StyleSheet.create({
   flatList: {
     width: 250
   },
-  view: {
-    position: 'absolute',
-    alignItems: 'center',
-    width: 300
+  container: {
+    height: HEIGHT
   }
 })

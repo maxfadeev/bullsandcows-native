@@ -20,7 +20,10 @@ const ResultsTable = ({ guesses, scores }) => {
     scoresItems.push([])
   }
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
       <FlatList
         scrollEnabled={false}
         data={guesses.map((v, i) => ({ key: i, guess: v }))}
@@ -63,6 +66,10 @@ const ResultsTable = ({ guesses, scores }) => {
 
 const styles = StyleSheet.create({
   container: {
+    height: '100%',
+    marginTop: 80
+  },
+  contentContainer: {
     flexGrow: 1,
     flexDirection: 'row'
   },

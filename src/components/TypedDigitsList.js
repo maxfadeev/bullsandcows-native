@@ -8,12 +8,12 @@ import { SCORE_TURN } from '../constants/Game'
 
 const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
   <FlatList
+    contentContainerStyle={styles.container}
     scrollEnabled={false}
-    style={styles.flatList}
     numColumns={4}
     data={typedDigits.map((d, i) => ({ key: i, digit: d }))}
     renderItem={({ item }) => (
-      <View style={styles.container}>
+      <View style={styles.digitContainer}>
         <TypedDigit
           onDiscard={() => onDiscardDigit(item.digit, item.key)}
           {...props}
@@ -27,11 +27,10 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
 )
 
 const styles = StyleSheet.create({
-  flatList: {
-    width: 128
-  },
   container: {
-    flex: 1,
+    height: 180
+  },
+  digitContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row'
