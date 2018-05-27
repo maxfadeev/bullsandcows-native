@@ -125,7 +125,7 @@ describe('typedDigits reducer', () => {
   })
 
   describe('handle FETCH_DIGITS_SUCCESS', () => {
-    it('should wape out all numerals', () => {
+    it('should wipe out all numerals', () => {
       expect(
         reducer([1, 2, 3, 4], {
           type: types.FETCH_DIGITS_SUCCESS,

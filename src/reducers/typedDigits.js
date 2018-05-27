@@ -32,10 +32,10 @@ const typedDigits = (state = Array(SECRET_LENGTH).fill(SUB), action) => {
   switch (action.type) {
     case TYPE_DIGIT:
       if (isNumeralAllowable(state, action.numeral, action.turn)) {
-        let isEnought = false
+        let isEnough = false
         return state.map(numeral => {
-          if (!isEnought && numeral === SUB) {
-            isEnought = true
+          if (!isEnough && numeral === SUB) {
+            isEnough = true
             return action.numeral
           }
           return numeral
