@@ -5,8 +5,9 @@ import NumericButtonsContainer from '../containers/NumericButtonsContainer'
 import TypedDigitsContainer from '../containers/TypedDigitsContainer'
 import RoundButtonContainer from '../containers/RoundButtonContainer'
 import ResultsTableContainer from '../containers/ResultsTableContainer'
+import MessageContainer from '../containers/MessageContainer'
 
-import { RELAY_NUMERALS, RELAY_BUTTON } from '../constants/Game'
+import { RELAY_NUMERALS, RELAY_BUTTON, NUMERALS } from '../constants/Game'
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -52,6 +53,7 @@ export default class Game extends React.Component {
     return (
       <View style={styles.container}>
         <ResultsTableContainer />
+        <MessageContainer />
         <TypedDigitsContainer
           {...this.handleRoundButton}
           toggleTypedDigitsLock={this.toggleTypedDigitsLock}
@@ -59,10 +61,7 @@ export default class Game extends React.Component {
           toggleRelay={this.toggleRelay}
           relay={this.state.relay}
         />
-        <NumericButtonsContainer
-          numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          relay={this.state.relay}
-        />
+        <NumericButtonsContainer numerals={NUMERALS} relay={this.state.relay} />
         <RoundButtonContainer
           {...this.handleRoundButton}
           toggleTypedDigitsLock={this.toggleTypedDigitsLock}
