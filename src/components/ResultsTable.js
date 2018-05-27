@@ -77,7 +77,9 @@ const styles = StyleSheet.create({
     width: 95,
     height: Platform.OS === 'android' ? 38 : 34,
     flex: 1,
-    paddingBottom: Platform.OS === 'android' ? 5 : 0
+    paddingBottom: Platform.OS === 'android' ? 5 : 0,
+    borderBottomWidth: 1,
+    borderBottomColor: '#aaa'
   },
   text: {
     fontFamily: 'VollkornSC-Bold',
