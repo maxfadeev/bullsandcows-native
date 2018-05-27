@@ -21,10 +21,9 @@ const TypedDigitsList = ({ typedDigits, turn, onDiscardDigit, ...props }) => (
 
 const styles = StyleSheet.create({
   container: {
-    height: 180,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
+    height: 100,
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 })
 
