@@ -1,5 +1,5 @@
 import reducer from './typedDigits'
-import * as types from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 import {
   SUB,
   GUESS_TURN,
@@ -22,7 +22,7 @@ describe('typedDigits reducer', () => {
       const numeral = 7
       expect(
         reducer(initialState, {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -33,7 +33,7 @@ describe('typedDigits reducer', () => {
       const numeral = 0
       expect(
         reducer(initialState, {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -44,7 +44,7 @@ describe('typedDigits reducer', () => {
       const numeral = 7
       expect(
         reducer([numeral, SUB, SUB, SUB], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -55,7 +55,7 @@ describe('typedDigits reducer', () => {
       const numeral = 7
       expect(
         reducer([1, 2, 3, 4], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -70,7 +70,7 @@ describe('typedDigits reducer', () => {
       const numeral = 3
       expect(
         reducer([SUB, SUB], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -81,7 +81,7 @@ describe('typedDigits reducer', () => {
       const numeral = 8
       expect(
         reducer([SUB, SUB], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -92,7 +92,7 @@ describe('typedDigits reducer', () => {
       const numeral = 3
       expect(
         reducer([2, SUB], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -103,7 +103,7 @@ describe('typedDigits reducer', () => {
       const numeral = 1
       expect(
         reducer([1, 2], {
-          type: types.TYPE_DIGIT,
+          type: ActionTypes.TYPE_DIGIT,
           numeral,
           turn
         })
@@ -117,7 +117,7 @@ describe('typedDigits reducer', () => {
       const key = 0
       expect(
         reducer([1, 2, 3, 4], {
-          type: types.DISCARD_TYPED_DIGIT,
+          type: ActionTypes.DISCARD_TYPED_DIGIT,
           key
         })
       ).toEqual([SUB, 2, 3, 4])
@@ -128,7 +128,7 @@ describe('typedDigits reducer', () => {
     it('should wipe out all numerals', () => {
       expect(
         reducer([1, 2, 3, 4], {
-          type: types.FETCH_DIGITS_SUCCESS,
+          type: ActionTypes.FETCH_DIGITS_SUCCESS,
           turn: GUESS_TURN
         })
       ).toEqual([SUB, SUB])

@@ -1,5 +1,5 @@
 import reducer from './guesses'
-import * as types from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 
 describe('guesses reducer', () => {
   const initialState = {
@@ -16,7 +16,7 @@ describe('guesses reducer', () => {
     const fetchedDigits = [5, 6, 7, 8]
     expect(
       reducer(initialState, {
-        type: types.FETCH_DIGITS_SUCCESS,
+        type: ActionTypes.FETCH_DIGITS_SUCCESS,
         typedDigits,
         fetchedDigits,
         turn: 'GUESS_TURN'

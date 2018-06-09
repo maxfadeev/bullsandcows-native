@@ -1,5 +1,5 @@
 import reducer from './scores'
-import * as types from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 
 describe('scores reducer', () => {
   const initialState = {
@@ -16,7 +16,7 @@ describe('scores reducer', () => {
     const fetchedDigits = [0, 0]
     expect(
       reducer(initialState, {
-        type: types.FETCH_DIGITS_SUCCESS,
+        type: ActionTypes.FETCH_DIGITS_SUCCESS,
         typedDigits,
         fetchedDigits,
         turn: 'SCORE_TURN'
