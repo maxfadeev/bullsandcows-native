@@ -21,7 +21,7 @@ export default class TypedDigit extends PureComponent {
 
   render() {
     return (
-      <TouchableOpacity style={{ flex: 1 }} onPress={this.onPress}>
+      <TouchableOpacity onPress={this.onPress}>
         <Animated.Text style={[styles.text, { opacity: this.state.opacity }]}>
           {this.props.children}
         </Animated.Text>
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     fontSize: 33,
     textAlign: 'center',
     fontFamily: 'VollkornSC-Regular',
-    flex: 1
+    width: 30
   }
 })

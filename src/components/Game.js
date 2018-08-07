@@ -1,9 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import NumericButtonsContainer from '../containers/NumericButtonsContainer'
 import TypedDigitsContainer from '../containers/TypedDigitsContainer'
 import RoundButtonContainer from '../containers/RoundButtonContainer'
+import ResultsTableContainer from '../containers/ResultsTableContainer'
 
 import { RELAY_NUMERALS, RELAY_BUTTON } from '../constants/Game'
 
@@ -49,31 +50,34 @@ export default class Game extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center' }}>
-        <View style={{ flex: 6 }} />
-        <View style={{ flex: 1 }}>
-          <TypedDigitsContainer
-            {...this.handleRoundButton}
-            toggleTypedDigitsLock={this.toggleTypedDigitsLock}
-            isLocked={this.state.isTypedDigitsLocked}
-            toggleRelay={this.toggleRelay}
-            relay={this.state.relay}
-          />
-        </View>
-        <View style={{ flex: 3, width: 300 }}>
-          <NumericButtonsContainer
-            numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
-            relay={this.state.relay}
-          />
-          <RoundButtonContainer
-            {...this.handleRoundButton}
-            toggleTypedDigitsLock={this.toggleTypedDigitsLock}
-            isDisabled={this.state.isRoundButtonDisabled}
-            toggleRelay={this.toggleRelay}
-            relay={this.state.relay}
-          />
-        </View>
+      <View style={styles.container}>
+        <ResultsTableContainer />
+        <TypedDigitsContainer
+          {...this.handleRoundButton}
+          toggleTypedDigitsLock={this.toggleTypedDigitsLock}
+          isLocked={this.state.isTypedDigitsLocked}
+          toggleRelay={this.toggleRelay}
+          relay={this.state.relay}
+        />
+        <NumericButtonsContainer
+          numerals={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
+          relay={this.state.relay}
+        />
+        <RoundButtonContainer
+          {...this.handleRoundButton}
+          toggleTypedDigitsLock={this.toggleTypedDigitsLock}
+          isDisabled={this.state.isRoundButtonDisabled}
+          toggleRelay={this.toggleRelay}
+          relay={this.state.relay}
+        />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center'
+  }
+})

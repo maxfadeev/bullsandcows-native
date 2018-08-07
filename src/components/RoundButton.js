@@ -10,33 +10,33 @@ import {
 import RoundButtonSpinner from './RoundButtonSpinner'
 import { WINDOW_HEIGHT, RELAY_BUTTON } from '../constants/Game'
 
+const HEIGHT = 170
+
 export default class RoundButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
       press: new Animated.Value(0),
-      translateY: new Animated.Value(WINDOW_HEIGHT / 3),
+      translateY: new Animated.Value(HEIGHT),
       isLoading: false
     }
     this.onPress = this.onPress.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.relay !== this.props.relay) {
+  componentDidUpdate(prevProps) {
+    if (this.props.relay !== prevProps.relay) {
       Animated.spring(this.state.translateY, {
-        toValue: nextProps.relay !== RELAY_BUTTON ? WINDOW_HEIGHT / 3 : 30,
+        toValue: this.props.relay !== RELAY_BUTTON ? HEIGHT : 0,
         speed: 25,
         bounciness: 15,
         useNativeDriver: true
       }).start(() => {
-        if (nextProps.relay !== RELAY_BUTTON) {
+        if (this.props.relay !== RELAY_BUTTON) {
           this.setState({ isLoading: false })
         }
       })
     }
-  }
 
-  componentDidUpdate() {
     if (!this.state.isLoading) {
       this.pressUp()
     }
@@ -85,14 +85,14 @@ export default class RoundButton extends Component {
     return (
       <Animated.View
         style={[
-          styles.view,
+          styles.container,
           { transform: [{ translateY: this.state.translateY }] }
         ]}
       >
         <TouchableWithoutFeedback onPress={this.onPress}>
           <Animated.View
             style={[
-              styles.container,
+              styles.innerContainer,
               {
                 transform: [
                   {
@@ -127,6 +127,11 @@ export default class RoundButton extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    bottom: 0,
+    height: HEIGHT
+  },
+  innerContainer: {
     width: 100,
     height: 110
   },
@@ -155,10 +160,5 @@ const styles = StyleSheet.create({
     height: 100,
     backgroundColor: '#5c5c5c',
     borderRadius: 100
-  },
-  view: {
-    height: 110,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 })

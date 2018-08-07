@@ -1,13 +1,11 @@
 import React from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 
-const ScoreDigitIcon = ({ item }) => (
+const ScoreDigitIcon = ({ index }) => (
   <View style={styles.container}>
     <View
       style={
-        item.key === 0
-          ? [styles.icon, styles.green]
-          : [styles.icon, styles.orange]
+        index === 0 ? [styles.icon, styles.green] : [styles.icon, styles.orange]
       }
     />
   </View>
@@ -15,7 +13,7 @@ const ScoreDigitIcon = ({ item }) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: 30,
     alignItems: 'center'
   },
   icon: {
